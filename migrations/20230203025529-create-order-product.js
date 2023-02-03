@@ -11,7 +11,6 @@ module.exports = {
       },
       orderInfoId: {
         allowNull: false,
-        autoIncrement: true,
         type: Sequelize.INTEGER
       },
       createdAt: {

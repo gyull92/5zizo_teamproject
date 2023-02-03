@@ -18,8 +18,13 @@ module.exports = {
         type: Sequelize.STRING
       },
       phone: {
+        allowNull:false,
+
+        type: Sequelize.INTEGER
+      },
+      state: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
