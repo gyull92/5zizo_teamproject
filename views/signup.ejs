@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+  .signUpBox {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+  }
+
+  .input-group {
+      margin-bottom: 10px;
+  }
+
+  label {
+      display: block;
+      margin-bottom: 5px;
+  }
+
+  input {
+      width: 90%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+  }
+
+  .btn {
+      width: 100%;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+      margin-top: 20px;
+  }
+  #main {
+      width: 100px;
+      padding: 10px;
+      background-color: #71d671;
+      color: white;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      margin-bottom: 20px;
+  }
+  #checkbox1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+  }
+  #checkbox2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+</style>
+
+<body>
+    <div class="signUpBox">   
+        <button id="main" type="button" onclick="location.href='/'" class="btn">main</button>
+        <form id="signup-form" action="/auth/signup" method="post">
+          <div class="input-group">
+            <label for="signup-email">이메일</label>
+            <input id="signup-email" type="email" name="email" required autofocus>
+          </div>
+          <div class="input-group">
+            <label for="signup-password">비밀번호</label>
+            <input id="signup-password" type="password" name="password" required autofocus>
+          </div>
+          <div class="input-group">
+            <label for="signup-phone">휴대전화</label>
+            <input id="signup-phone" type="text" name="phone" required autofocus>
+          </div>
+          <div class="input-group">
+            <div id="checkbox1">
+            <input type="checkbox" name="userType" value="1" id="general" required autofocus>일반회원
+            </div>
+            <div id="checkbox1">
+            <input type="checkbox" name="userType" value="2" id="manager" required autofocus>사장님으로 가입하기
+            </div>
+          </div>
+          <button type="submit" class="btn">회원가입</button>
+          <button type="button" onclick="location.href='/auth/login'" class="btn">로그인</button>
+        </form>
+      </div>
+</body>
+<script>
+  document.querySelector('#manager').addEventListener('change', function () {
+    document.querySelector('#general').disabled = this.checked;
+  });
+  document.querySelector('#general').addEventListener('change', function () {
+    document.querySelector('#manager').disabled = this.checked;
+  });
+</script>
+</html>

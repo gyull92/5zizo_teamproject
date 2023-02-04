@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .loginOutBox {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        height: 100vh;
+    }
+  
+    .input-group {
+        margin-bottom: 10px;
+    }
+  
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+  
+    input {
+        width: 90%;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+  
+    #main {
+        width: 100px;
+        padding: 10px;
+        background-color: #71d671;
+        color: white;
+        border-radius: 10px;
+        border: none;
+        cursor: pointer;
+        margin-bottom: 20px;
+    }
+    #signup {
+        width: 100%;
+        padding: 10px;
+        background-color: #4CAF50;
+        color: white;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        margin-top: 20px;
+    }
+    #login {
+        width: 100%;
+        padding: 10px;
+        background-color: #71d671;
+        color: white;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        margin-top: 20px;
+    }
+    /* #kakao {
+        width: 100%;
+        padding: 10px;
+        background-color: #b5ed45;
+        color: rgb(0, 0, 0);
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        margin-top: 20px;
+    } */
+  </style>
+<body>
+    <div class="loginOutBox">
+        <button id="main" type="button" onclick="location.href='/'" class="btn">main</button>
+        <form id="login-form" action="/auth/login" method="post">
+          <div class="input-group">
+            <label for="email">이메일</label>
+            <input id="email" type="email" name="email" required autofocus>
+          </div>
+          <div class="input-group">
+            <label for="password">비밀번호</label>
+            <input id="password" type="password" name="password" required>
+          </div>
+          <button id="login"  type="submit" class="btn">로그인</button>
+          <button id="signup" type="button" onclick="location.href='/auth/signup'" class="btn">회원가입</button>
+          <!-- <button id="kakao"  href="/auth/kakao" class="btn">카카오톡</button> -->
+        </form>
+      </div>
+</body>
+</html>
