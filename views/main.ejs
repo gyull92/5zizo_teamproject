@@ -32,13 +32,26 @@
     <div class="mainBox">
     <h1>main</h1>
     <% if (user) { %>
-    <%= user.email.split('@')[0] %>님 안녕하세요. 
-    <button id="logout" type="button" onclick="location.href='/auth/logout'" class="btn">로그아웃</button>
-    <button id="main"   type="button" onclick="location.href='/profile'"     class="btn">마이페이지</button>
-    <% } else if (!user) { %>
-    <button id="login"  type="button" onclick="location.href='/auth/login'"  class="btn">로그인 하러가기</button>
-    <button id="signup" type="button" onclick="location.href='/auth/signup'" class="btn">회원가입</button>
+      <% if (user.userType === 2) { %>
+      <%= user.email.split('@')[0] %>님 안녕하세요. 
+      <button id="logout" type="button" onclick="location.href='/auth/logout'"  class="btn">로그아웃</button>
+      <button id="main"   type="button" onclick="location.href='/adminprofile'" class="btn">관리자 페이지</button>
+      <% } else { %>
+      <%= user.email.split('@')[0] %>님 안녕하세요. 
+      <button id="logout" type="button" onclick="location.href='/auth/logout'"  class="btn">로그아웃</button>
+      <button id="main"   type="button" onclick="location.href='/profile'"      class="btn">마이페이지</button>
+      <% } %>
+    <% } else { %>
+    <button id="login"  type="button" onclick="location.href='/auth/login'"   class="btn">로그인 하러가기</button>
+    <button id="signup" type="button" onclick="location.href='/auth/signup'"  class="btn">회원가입</button>
     <% } %>
     </div>
 </body>
 </html>
+
+
+
+
+
+
+

@@ -89,7 +89,7 @@
             <input type="checkbox" name="userType" value="1" id="general" required autofocus>일반회원
             </div>
             <div id="checkbox1">
-            <input type="checkbox" name="userType" value="2" id="manager" required autofocus>사장님으로 가입하기
+            <input type="checkbox" name="userType" value="2" id="admin" required autofocus>사장님으로 가입하기
             </div>
           </div>
           <button type="submit" class="btn">회원가입</button>
@@ -98,11 +98,11 @@
       </div>
 </body>
 <script>
-  document.querySelector('#manager').addEventListener('change', function () {
+  document.querySelector('#admin').addEventListener('change', function () {
     document.querySelector('#general').disabled = this.checked;
   });
   document.querySelector('#general').addEventListener('change', function () {
-    document.querySelector('#manager').disabled = this.checked;
+    document.querySelector('#admin').disabled = this.checked;
   });
 </script>
 </html>

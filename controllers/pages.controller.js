@@ -34,6 +34,15 @@ exports.renderProfile = (req, res, next) => {
     }
 };  
 
+exports.renderAdminInProfile = (req, res, next) => {
+    try {
+        res.render('adminInprofile');
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+        next(err);
+    }
+}; 
+
 exports.renderWithdrawal = (req, res, next) => {
     try {
         res.render('withdrawal');

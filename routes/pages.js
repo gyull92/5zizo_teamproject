@@ -1,7 +1,9 @@
 const express = require('express');
 const router  = express.Router();
-const { isLoggedIn, isNotLoggedIn } = require('../middlewares/auth');
-const { renderMain, renderLogin, renderSignUp, renderProfile, renderWithdrawal } = require('../controllers/pages.controller');
+const { isLoggedIn   , isNotLoggedIn } = require('../middlewares/auth');
+const { isGeneralIn  , isAdminIn }     = require('../middlewares/auth');
+const { renderMain   , renderLogin     , renderSignUp }         = require('../controllers/pages.controller');
+const { renderProfile, renderWithdrawal, renderAdminInProfile } = require('../controllers/pages.controller');
 
 // User's Data
 router.use((req, res, next) => {
@@ -10,10 +12,11 @@ router.use((req, res, next) => {
     next();
 })
 
-router.get('/', renderMain);                                     // GET  /
-router.get('/auth/login',      isNotLoggedIn, renderLogin);      // GET  /auth/login
-router.get('/auth/signup',     isNotLoggedIn, renderSignUp);     // GET  /auth/signup
-router.get('/auth/withdrawal', isLoggedIn   , renderWithdrawal); // GET  /withdrawal
-router.get('/profile',         isLoggedIn   , renderProfile);    // GET  /profile
+router.get('/', renderMain);                                                       // GET  /
+router.get('/auth/login'     , isNotLoggedIn, renderLogin);                        // GET  /auth/login
+router.get('/auth/signup'    , isNotLoggedIn, renderSignUp);                       // GET  /auth/signup
+router.get('/auth/withdrawal', isLoggedIn   , renderWithdrawal);                   // GET  /withdrawal
+router.get('/profile'        , isLoggedIn   , isGeneralIn , renderProfile);        // GET  /profile
+router.get('/adminprofile'   , isLoggedIn   , isAdminIn   , renderAdminInProfile); // GET  /adminprofile
 
 module.exports = router;

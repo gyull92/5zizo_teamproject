@@ -18,3 +18,31 @@ exports.isNotLoggedIn = (req, res, next) => {
         res.redirect(`/?error=${message}`);
     }
 };
+
+exports.isGeneralIn = (req, res, next) => {
+    const userType = req.user.userType;
+    if (userType === 1) {
+        console.log("user.userType---------------", res.locals.user.userType);
+        next();
+    }
+    else {
+        const message = "관리자는 접근할 수 없습니다."
+        res.redirect(`/?error=${message}`);
+    }
+};
+
+exports.isAdminIn = (req, res, next) => {
+    const userType = req.user.userType;
+    if (userType === 2) {
+        next();
+    }
+    else {
+        const message = "일반회원은 접근할 수 없습니다."
+        res.redirect(`/?error=${message}`);
+    }
+};
+
+// exports.TEST = (req, res, next) => {
+//     const userType = req.user.userType;
+//     console.log("userType--------", req.user.userType);
+// }
