@@ -11,8 +11,9 @@ const { sequelize } = require('./models');
 dotenv.config(); 
 
 // ----------------------------------------- connect routes ----------------------------------------
-const authRouter = require('./routes/auth');
-const pageRouter = require('./routes/pages');
+const authRouter  = require('./routes/auth.router');
+const pageRouter  = require('./routes/pages.router');
+const adminRouter = require('./routes/admin.router');
 const passportConfig = require('./controllers/passport');
 
 // -------------------------------------------------------------------------------------------------
@@ -51,8 +52,9 @@ app.use(passport.initialize());
 app.use(passport.session()); 
 
 // ------------------------------------------ routes -----------------------------------------------
-app.use('/', pageRouter);   
-app.use('/auth', authRouter);
+app.use('/',      pageRouter);   
+app.use('/auth',  authRouter);
+app.use('/admin', adminRouter);
 
 // ------------------------------------------ error ------------------------------------------------
 app.use((req, res, next) => {

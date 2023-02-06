@@ -16,7 +16,11 @@ router.get('/', renderMain);                                                    
 router.get('/auth/login'     , isNotLoggedIn, renderLogin);                        // GET  /auth/login
 router.get('/auth/signup'    , isNotLoggedIn, renderSignUp);                       // GET  /auth/signup
 router.get('/auth/withdrawal', isLoggedIn   , renderWithdrawal);                   // GET  /withdrawal
+
+// User's profile page Routes  -------------------------------------------------------------------------
 router.get('/profile'        , isLoggedIn   , isGeneralIn , renderProfile);        // GET  /profile
+
+// Admin's profile page Routes -------------------------------------------------------------------------
 router.get('/adminprofile'   , isLoggedIn   , isAdminIn   , renderAdminInProfile); // GET  /adminprofile
 
 module.exports = router;

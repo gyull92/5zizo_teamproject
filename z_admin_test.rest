@@ -1,0 +1,29 @@
+POST http://localhost:3000/admin/adminprofile/productAdd
+Content-Type: application/json
+
+{
+    "image": "오지게 맛있는 젤리 이미지2",
+    "name": "오지게 맛있는 젤리2",
+    "info": "이것은 오지게 맛있는 젤리2",
+    "price": 1200
+}
+
+###
+GET http://localhost:3000/admin/adminprofile/productList
+
+###
+GET http://localhost:3000/admin/adminprofile/adminProduct
+
+###
+PUT http://localhost:3000/admin/adminprofile/productEdit/1
+Content-Type: application/json
+
+{
+    "image": "졸라 오지게 맛있는 젤리 이미지",
+    "name": "졸라 오지게 맛있는 젤리",
+    "info": "이것은 졸라 오지게 맛있는 젤리",
+    "price": 2000
+}
+
+###
+DELETE http://localhost:3000/admin/adminprofile/productDelete/1
