@@ -1,7 +1,7 @@
 const express = require("express");
 const router  = express.Router();
-const { isLoggedIn, isNotLoggedIn } = require('../middlewares/auth')
-const { isAdminIn }     = require('../middlewares/auth');
+const { isLoggedIn } = require('../middlewares/auth')
+const { isAdminIn }  = require('../middlewares/auth');
 
 const AdminController = require("../controllers/admin.controller");
 const adminController = new AdminController();
