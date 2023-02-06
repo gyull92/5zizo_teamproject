@@ -110,6 +110,7 @@
                             let quantity = productsInCart[i].quantity;
                             let productId = productsInCart[i].products.productId;
                             productIdList.push(productId);
+                            
                             makeCart(image, name, price, quantity, productId);
                         }
                         window.localStorage.setItem('productIdList', productIdList);
