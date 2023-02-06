@@ -5,7 +5,7 @@ class PaymentListController {
 
     findPaymentAll = async (req, res, next) => {
         try {
-            const { userId } = req.params;
+            const userId = "1"
             const paymentList = await this.paymentListService.findPaymentAll(userId);
 
             res.status(201).json({ data: paymentList });

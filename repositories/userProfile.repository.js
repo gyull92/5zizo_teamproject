@@ -4,6 +4,7 @@ const { user } = require("../models");
 class UserProfileRepository {
     profileFind = async (userId) => {
         try {
+            console.log(123123123);
             const profileData = await user.findAll({
                 where: { userId: userId }
             });
@@ -14,9 +15,13 @@ class UserProfileRepository {
         };
     };
 
-    profileEdit = async () => {
+    profileEdit = async (userId, email, password, phone) => {
         try {
-            const profileEditData = await user.update();
+            const profileEditData = await user.update({
+                email, password, phone
+            }, {
+                where: { userId: userId },
+            });
 
             return profileEditData;
         } catch (error) {

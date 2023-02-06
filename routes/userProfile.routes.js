@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const { isLoggedIn } = require("../middlewares/auth")
 
 const UserProfileController = require("../controllers/userProfile.controller");
 const userProfileController = new UserProfileController();
@@ -10,7 +11,7 @@ router.get(
 );
 
 router.put(
-    "/userProfileEdit",
+    "/userProfileEdit:id",
     userProfileController.profileEdit
 );
 

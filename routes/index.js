@@ -19,7 +19,7 @@ router.use(
     productAddRouter,
     productDeleteRouter,
     productEditRouter,
-    userProfileRouter
+    userProfileRouter,
 );
 
 module.exports = router;

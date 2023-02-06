@@ -13,9 +13,9 @@ class UserProfileService {
         };
     };
 
-    profileEdit = async () => {
+    profileEdit = async (userId, email, password, phone) => {
         try {
-            const profileEditData = await this.userProfileRepository.profileEdit();
+            const profileEditData = await this.userProfileRepository.profileEdit(userId, email, password, phone);
 
             return profileEditData;
         } catch (error) {

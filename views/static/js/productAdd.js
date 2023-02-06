@@ -1,7 +1,7 @@
 function productAdd() {
-    let name = $('#name').val()
-    let price = $('#price').val()
-    let info = $('#info').val()
+    let name = $('#name').val();
+    let price = $('#price').val();
+    let info = $('#info').val();
     // let image = $('#image').val()
     let file = document.getElementById("Image").files[0];
     console.log(name, price, info, file)
@@ -22,7 +22,7 @@ function productAdd() {
         enctype: "multipart/form-data",
         success: function (response) {
             alert("상품 등록에 성공하였습니다.")
-            window.location.reload
+            window.location.replace("/productList");
         }
     });
 };

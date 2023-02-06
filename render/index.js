@@ -17,5 +17,16 @@ router.get("/userProfileEdit", (req, res) => {
     res.render("userProfileEdit.ejs");
 });
 
+router.get("/productOrder", (req, res) => {
+    res.render("productOrder.ejs");
+});
+
+router.get("/paymentList", (req, res) => {
+    res.render("paymentList.ejs");
+});
+
+router.get("/userPage", (req, res) => {
+    res.render("userPage.ejs");
+});
 
 module.exports = router;
