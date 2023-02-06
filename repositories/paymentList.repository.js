@@ -1,9 +1,23 @@
-const { orderInfo } = require("../models");
+const { orderinfo, product, orderproduct } = require("../models");
 
 class PaymentListRepository {
-    findPaymentAll = async () => {
+    findPaymentAll = async (userId) => {
         try {
-            const paymentList = await orderInfo.findAll({});
+            const paymentList = await orderinfo.findAll({
+                where: { userId: userId },
+                include: [
+                    {
+                        // where: { orderinfoId: orderinfoId },
+                        // model: orderproduct,
+                        // attributes: ["productId"],
+                    },
+                    // {
+                    //     where: { productId: productId },
+                    //     models: product,
+                    //     attributes: ["image", "name", "info", "price"],
+                    // },
+                ],
+            });
 
             return paymentList;
         } catch (error) {

@@ -5,6 +5,7 @@ class AdminProductListService {
 
     findProductList = async () => {
         try {
+            console.log(2222222222222222)
             const productList = await this.adminProductListRepository.findProductList();
 
             return productList;

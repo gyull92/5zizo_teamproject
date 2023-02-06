@@ -5,8 +5,10 @@ class ProductAddController {
 
     productAdd = async (req, res, next) => {
         try {
-            const { image, name, info, price } = req.body;
-
+            const { name, info, price } = req.body;
+            const imgPath = req.file.path;
+            const image = imgPath.split("\\")[3];
+            
             const productAddData = await this.productAddService.productAdd(image, name, info, price);
 
             res.status(201).json({ data: productAddData });

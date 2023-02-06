@@ -5,7 +5,7 @@ const PaymentListController = require("../controllers/paymentList.controller");
 const paymentListController = new PaymentListController();
 
 router.get(
-    "/paymentList",
+    "/paymentList/:userId",
     paymentListController.findPaymentAll
 );
 

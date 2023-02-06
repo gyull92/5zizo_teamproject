@@ -8,6 +8,7 @@ const memberListRouter = require("./memberList.routes");
 const productAddRouter = require("./productAdd.routes");
 const productDeleteRouter = require("./productDelete.routes");
 const productEditRouter = require("./productEdit.routes");
+const userProfileRouter = require("./userProfile.routes");
 
 router.use(
     "/",
@@ -18,6 +19,7 @@ router.use(
     productAddRouter,
     productDeleteRouter,
     productEditRouter,
+    userProfileRouter
 );
 
 module.exports = router;

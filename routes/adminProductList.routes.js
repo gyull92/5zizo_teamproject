@@ -5,7 +5,7 @@ const AdminProductListController = require("../controllers/adminProductList.cont
 const adminProductListController = new AdminProductListController();
 
 router.get(
-    "/adminProduct",
+    "/adminProductList",
     adminProductListController.findProductList
 );
 

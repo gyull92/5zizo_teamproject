@@ -5,6 +5,7 @@ class AdminProductListController {
 
     findProductList = async (req, res, next) => {
         try {
+
             const productList = await this.adminProductListService.findProductList();
 
             res.status(201).json({ data: productList });
