@@ -80,6 +80,13 @@
             margin-bottom: 5px;
             margin-top: 5px;
         }
+
+        .card {
+            width: 50%;
+            margin: auto;
+            margin-top: 50px;
+            text-align: right;
+        }
     </style>
 
     <script>
@@ -113,18 +120,37 @@
                 });
         }
 
+
+        let totalPrice = 0;
+        let totalQuantity = 0;
         function makeCart(image, name, price, quantity, productId) {
             let subPrice = price * quantity;
+            totalPrice  += subPrice;
+            totalQuantity += quantity;
             let tempHtml = `<tr>
                 <th scope="row"><input id="check-box-${productId}" type="checkbox" aria-label="Checkbox for following text input"></th>
                 <td><img src="${image}"></td>
                 <td>${name}</td>
-                <td>${price}원</td>
+                <td>${price.toLocaleString('ko-KR')}원</td>
                 <td><input id="modQuantity-${productId}" class="modQuantity" type="number" min="0" value="${quantity}" /><button onclick="editQuantity(${productId})" type="button" class="btn btn-outline-dark">수량변경</button></td>
-                <td>${subPrice}원</td>
+                <td>${subPrice.toLocaleString('ko-KR')}원</td>
                 <td><button onclick="deleteProduct(${productId})" type="button" class="btn btn-dark">삭제</button></td>
             </tr>`;
             $("#products-in-carts").append(tempHtml);
+
+            if(totalPrice>0){
+                makeBillCard(totalPrice, totalQuantity);
+            }
+        }
+
+        function makeBillCard(totalPrice, totalQuantity) {
+            $("#orderCard").html("");
+            let tempHtml = `<div class="card-body">
+                        <h5 class="card-title">합계 금액 : ${totalPrice.toLocaleString('ko-KR')}원</h5>
+                        <p class="card-text">상품 갯수 : ${totalQuantity}개</p>
+                        <a href="#" class="btn btn-primary">바로 구매하기</a>
+                        </div>`
+            $("#orderCard").append(tempHtml);
         }
 
         function makeBnt() {
@@ -261,6 +287,14 @@
       </table>
 
       <div id="Bnts"></div>
+
+      <div id="orderCard" class="card">
+        <!-- <div class="card-body">
+          <h5 class="card-title">합계 금액 : </h5>
+          <p class="card-text">상품 갯수 : </p>
+          <a href="#" class="btn btn-primary">바로 구매하기</a>
+        </div> -->
+      </div>
 
 
     

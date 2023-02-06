@@ -5,10 +5,6 @@ const { Op } = require('sequelize');
 
 const { product, cart } = require('../models');
 
-// router.get('/', (req, res) => {
-//     res.send('Hello World!')
-// });
-
 // 상품 등록
 router.post('/product', async (req, res) => {
     try {
@@ -147,8 +143,6 @@ router.delete('/cart', async(req, res) => {
 router.delete('/del/checked', async(req, res) => {
     // const { userId } = res.locals.user;
     const { checkedList } = req.body;
-
-    console.log(checkedList.length);
 
     if(checkedList.length === 1){
         await cart.destroy({
