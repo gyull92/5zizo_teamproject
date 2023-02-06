@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <button id="main" type="button" onclick="location.href='/'" class="btn">main</button>
+    <% if (user) { %>
+    <%= user.email.split('@')[0] %>님 마이페이지 <% } %>
+    <button id="logout" type="button" onclick="location.href='/auth/logout'" class="btn">로그아웃</button>
+    <button id="Withdrawal" type="button" onclick="if (confirm('회원탈퇴를 하시겠습니까?')) location.href='/auth/withdrawal'" class="btn">회원탈퇴</button>
+
+</body>
+</html>

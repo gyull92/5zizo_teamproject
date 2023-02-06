@@ -41,3 +41,6 @@ db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
 module.exports = db;
+
+// 모든 이식을 되돌리고 싶을 때는 아래의 명령어를 참고하면 된다.
+// npx sequelize-cli db:migrate:undo:all
