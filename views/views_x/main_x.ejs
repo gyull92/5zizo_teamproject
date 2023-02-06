@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    .mainBox {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .btn {
+        width: 150px;
+        padding: 10px;
+        background-color: #4CAF50;
+        color: white;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        margin-top: 20px;
+    }
+</style>
+
+<body>
+    <div class="mainBox">
+    <h1>main</h1>
+    <% if (user) { %>
+      <% if (user.userType === 2) { %>
+      <%= user.email.split('@')[0] %>님 안녕하세요. 
+      <button id="logout" type="button" onclick="location.href='/auth/logout'"  class="btn">로그아웃</button>
+      <button id="main"   type="button" onclick="location.href='/adminprofile'" class="btn">관리자 페이지</button>
+      <% } else { %>
+      <%= user.email.split('@')[0] %>님 안녕하세요. 
+      <button id="logout" type="button" onclick="location.href='/auth/logout'"  class="btn">로그아웃</button>
+      <button id="main"   type="button" onclick="location.href='/profile'"      class="btn">마이페이지</button>
+      <% } %>
+    <% } else { %>
+    <button id="login"  type="button" onclick="location.href='/auth/login'"   class="btn">로그인 하러가기</button>
+    <button id="signup" type="button" onclick="location.href='/auth/signup'"  class="btn">회원가입</button>
+    <% } %>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+

@@ -2,8 +2,9 @@ const express = require('express');
 const router  = express.Router();
 const { isLoggedIn   , isNotLoggedIn } = require('../middlewares/auth');
 const { isGeneralIn  , isAdminIn }     = require('../middlewares/auth');
-const { renderMain   , renderLogin     , renderSignUp }         = require('../controllers/pages.controller');
+const { renderMain   , renderLogin , renderSignUp } = require('../controllers/pages.controller');
 const { renderProfile, renderWithdrawal, renderAdminInProfile } = require('../controllers/pages.controller');
+const { renderProductList} = require('../controllers/pages.controller');
 
 // User's Data
 router.use((req, res, next) => {
@@ -12,15 +13,19 @@ router.use((req, res, next) => {
     next();
 })
 
-router.get('/', renderMain);                                                       // GET  /
+// Use main page
+router.get('/'               , renderMain);                                        // GET  /
+router.get('/productList'    , renderProductList);                                 // GET  /renderProductList
+
+// Use auth page
 router.get('/auth/login'     , isNotLoggedIn, renderLogin);                        // GET  /auth/login
 router.get('/auth/signup'    , isNotLoggedIn, renderSignUp);                       // GET  /auth/signup
 router.get('/auth/withdrawal', isLoggedIn   , renderWithdrawal);                   // GET  /withdrawal
 
-// User's profile page Routes  -------------------------------------------------------------------------
+// Only general users can access -----------------------------------------------------------------------
 router.get('/profile'        , isLoggedIn   , isGeneralIn , renderProfile);        // GET  /profile
 
-// Admin's profile page Routes -------------------------------------------------------------------------
+// Only admin can access -------------------------------------------------------------------------------
 router.get('/adminprofile'   , isLoggedIn   , isAdminIn   , renderAdminInProfile); // GET  /adminprofile
 
 module.exports = router;

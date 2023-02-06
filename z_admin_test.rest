@@ -2,14 +2,14 @@ POST http://localhost:3000/admin/adminprofile/productAdd
 Content-Type: application/json
 
 {
-    "image": "오지게 맛있는 젤리 이미지3",
-    "name": "오지게 맛있는 젤리3",
-    "info": "이것은 오지게 맛있는 젤리3",
-    "price": 1500
+    "image": "오지게 맛있는 젤리 이미지2",
+    "name": "오지게 맛있는 젤리2",
+    "info": "이것은 오지게 맛있는 젤리2",
+    "price": 2500
 }
 
-###
-GET http://localhost:3000/admin/adminprofile/productList
+# ###
+# GET http://localhost:3000/admin/adminprofile/productList
 
 ###
 GET http://localhost:3000/admin/adminprofile/adminProduct

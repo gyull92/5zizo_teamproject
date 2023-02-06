@@ -29,7 +29,7 @@ class AdminRepository {
     
     findProductList = async () => {
         try {
-            const productList = await Product.findAll();  // userId 던져줘야할듯? 관리자(userType 2)가 등록한 상품 목록을 보는것이니. 
+            const productList = await Product.findAll({});
             return productList;
         } catch (error) {
             throw error;
