@@ -9,9 +9,17 @@ class Cart extends Sequelize.Model {
                 primaryKey    : true,
                 autoIncrement : true,
             },
-            totalPrice: {
-                type          : Sequelize.STRING(100),
-                allowNull     : true,
+            userId: {
+                type          : Sequelize.INTEGER,
+                allowNull     : false,
+            },
+            quantity: {
+                type          : Sequelize.INTEGER,
+                allowNull     : false,
+            },
+            productId: {
+                type          : Sequelize.INTEGER,
+                allowNull     : false,
             },
         }, { // options
             sequelize,
