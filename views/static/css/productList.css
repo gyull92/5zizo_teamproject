@@ -1,6 +1,8 @@
 #productcard {
     margin: auto;
     text-align: center;
+    width: 290px;
+    height: 500px;
 }
 
 #modQuantity {
@@ -14,4 +16,57 @@
 
 input[type=number]::-webkit-inner-spin-button {
     opacity: 1
+}
+
+#productlistbox {
+    width: 290px;
+    height: 500px;
+    margin: 30px 10px auto auto;
+}
+
+#imgbox {
+    width: 100%;
+    height: 250px;
+}
+
+#btnbox {
+    margin: auto;
+    width: 100%;
+    height: 30px;
+    text-align: center;
+}
+
+#infobox {
+    padding: 0px;
+}
+
+#priceinput {
+    text-align: center;
+    margin: auto 10px auto 10px;
+}
+
+#image {
+    max-width: 100%;
+    height: auto;
+}
+
+img {
+    object-fit: contain;
+}
+
+#product-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#pagebox {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    margin: 30px auto auto auto;
+} 
+
+.pagination {
+    margin: auto;
 }

@@ -5,6 +5,7 @@ class ProductEditController {
 
     productEdit = async (req, res, next) => {
         try {
+            console.log("222222")
             const { image, name, info, price } = req.body;
             const { productId } = req.params;
             const productEditData = await this.productEditService.productEdit(image, name, info, price, productId);

@@ -1,32 +1,51 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
-module.exports = (sequelize, DataTypes) => {
-  class user extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
-      // models.user.belongsTo(models.cart, { foreignKey: 'cartId' });
-      // models.user.belongsTo(models.orderinfo, { foreignKey: 'orderinfoId' });
+const Sequelize = require("sequelize");
+
+// user table
+class User extends Sequelize.Model {
+    static initiate(sequelize) {
+        User.init({
+            userId: {
+                type          : Sequelize.INTEGER,
+                primaryKey    : true,
+                autoIncrement : true,
+            },
+            email: {
+                type          : Sequelize.STRING(40),
+                allowNull     : true,
+                unique        : true,
+            },
+            password: {
+                type          : Sequelize.STRING(100),
+                allowNell     : true,
+            },
+            phone: {
+                type          : Sequelize.STRING(30),
+                allowNell     : true,
+            },
+            userType: {
+                type          : Sequelize.STRING(30),
+                allowNell     : false,
+            },
+            provider: {
+                type          : Sequelize.ENUM("local", "kakao"),
+                allowNull     : false,
+                defaultValue  : "local",
+            },
+            snsId: {   
+                type          : Sequelize.STRING(30),
+                allowNull     : true,              
+            },
+        }, { // options
+            sequelize,
+            timestamps  : true,
+            underscored : false,
+            paranoid    : false,
+            modelName   : "User",
+            tableName   : "users",
+            charset     : "utf8",
+            collate     : "utf8_general_ci",
+        });
     }
-  }
-  user.init({
-    userId: {
-      primaryKey: true,
-      type: DataTypes.INTEGER,
-    },
-    email: DataTypes.STRING,
-    password: DataTypes.STRING,
-    phone: DataTypes.STRING,
-    userType: DataTypes.INTEGER
-  }, {
-    sequelize,
-    modelName: 'user',
-  });
-  return user;
 };
+
+module.exports = User;

@@ -1,0 +1,56 @@
+#memberinfo {
+    width: 100%;
+    display: flex;
+}
+
+#membernumber {
+    margin: auto;
+    width: 10%;
+}
+
+#memebername {
+    margin: auto;
+    width: 30%;
+}
+
+#memberphone {
+    margin: auto;
+    width: 30%;
+}
+
+#memberemail {
+    margin: auto;
+    width: 30%;
+}
+
+#thbox {
+    width: 100%;
+}
+
+.table {
+    text-align: center;
+}
+
+.mt-3 {
+    text-align: center;
+}
+
+#number {
+    text-align: center;
+    width: 10%;
+}
+
+#name {
+    text-align: center;
+    width: 30%;
+}
+
+#phone {
+    text-align: center;
+    width: 30%;
+}
+
+#email {
+    text-align: center;
+    width: 30%;
+}

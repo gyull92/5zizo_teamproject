@@ -1,11 +1,11 @@
 // const { mapFinderOptions } = require("sequelize/types/utils");
-const { user } = require("../models");
+const { User } = require("../models");
 
 class UserProfileRepository {
     profileFind = async (userId) => {
         try {
             console.log(123123123);
-            const profileData = await user.findAll({
+            const profileData = await User.findAll({
                 where: { userId: userId }
             });
 
@@ -17,7 +17,7 @@ class UserProfileRepository {
 
     profileEdit = async (userId, email, password, phone) => {
         try {
-            const profileEditData = await user.update({
+            const profileEditData = await User.update({
                 email, password, phone
             }, {
                 where: { userId: userId },
@@ -31,7 +31,7 @@ class UserProfileRepository {
 
     profilePost = async () => {
         try {
-            const profilePostData = await user.create();
+            const profilePostData = await User.create();
 
             return profilePostData;
         } catch (error) {

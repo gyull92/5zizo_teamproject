@@ -34,10 +34,10 @@ function profileEdit() {
         <button type="submit" name="submit" class="btn btn-dark" style="width:200px;" onclick="profilesave(${userId})">수정하기</button>
     </div>`
                 $('#profilebox').append(temp_html)
-            }
+            };
         }
-    })
-}
+    });
+};
 
 function profilesave(userId) {
 
@@ -57,7 +57,7 @@ function profilesave(userId) {
         success: function (response) {
             console.log(response)
             alert("프로필 수정을 완료하였습니다.");
-            window.location.replace("/userProfile");
+            window.location.replace("/userPage");
         }
     });
 };

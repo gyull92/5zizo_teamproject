@@ -1,9 +1,9 @@
-const { product } = require("../models");
+const { Product } = require("../models");
 
 class ProductDeleteRepository {
     productDelete = async (productId) => {
         try {
-            const productDeleteData = await product.destroy({
+            const productDeleteData = await Product.destroy({
                 where: { productId: productId }
             });
             return productDeleteData;

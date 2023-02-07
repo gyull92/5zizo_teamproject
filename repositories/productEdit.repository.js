@@ -1,9 +1,9 @@
-const { product } = require("../models");
+const { Product } = require("../models");
 
 class ProductEditRepository {
     productEdit = async (image, name, info, price, productId) => {
         try {
-            const productEditData = await product.update({
+            const productEditData = await Product.update({
                 image,
                 name,
                 info,
