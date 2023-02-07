@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "root",
+    "password": "alskfl(30523",
+    "database": "5jijo_db_tset",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "e_commerce",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "e_commerce",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}

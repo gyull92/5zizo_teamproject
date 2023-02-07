@@ -1,27 +1,27 @@
 const Sequelize = require("sequelize");
 
-// product table
-class Product extends Sequelize.Model {
+// OrderInfo table
+class OrderInfo extends Sequelize.Model {
     static initiate(sequelize) {
-        Product.init({
-            productId: {
+        OrderInfo.init({
+            orderinfoId: {
                 type          : Sequelize.INTEGER,
                 primaryKey    : true,
                 autoIncrement : true
             },
-            image: {
-                type          : Sequelize.STRING,
-                allowNell     : false,
-            },
-            name: {
-                type          : Sequelize.STRING,
+            userId: {
+                type          : Sequelize.INTEGER,
                 allowNull     : false,
             },
-            info: {
+            address: {
                 type          : Sequelize.STRING,
                 allowNell     : false,
             },
-            price: {
+            phone: {
+                type          : Sequelize.INTEGER,
+                allowNell     : false,
+            },
+            state: {
                 type          : Sequelize.INTEGER,
                 allowNell     : false,
             }
@@ -30,19 +30,19 @@ class Product extends Sequelize.Model {
             timestamps  : true,
             underscored : false,
             paranoid    : false,
-            modelName   : "Product",
-            tableName   : "products",
+            modelName   : "OrderInfo",
+            tableName   : "orderInfos",
             charset     : "utf8",
             collate     : "utf8_general_ci",
         });
     }
     static associate(db) {        
-        db.Product.belongsToMany(db.OrderInfo, {  
-           foreignKey : 'orderInfoId',   
-           as         : 'orderInfoId',
+        db.OrderInfo.belongsToMany(db.Product, {  
+           foreignKey : 'productId',   
+           as         : 'productId',
            through    : 'orderProducts',
         });
     }
 };
 
-module.exports = Product;
+module.exports = OrderInfo;
