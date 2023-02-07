@@ -6,16 +6,22 @@ const { User } = require('../models');
 exports.signUp = async (req, res, next) => {
     const { email, password, phone, userType } = req.body;
     try {
-        const exUser = await User.findOne({ where: { email } }); 
+        const exUser  = await User.findOne({ where: { email } }); 
+        const exAdmin = await User.findAll({ where: { userType: 2 } }); 
         if (exUser) {
             return res.redirect('/auth/signup?error=exist');
+        }
+        // let userType = 0
+        if (exAdmin[0]) {
+            userType = 1;
         }
         const pwHash = await bcrypt.hash(password, 12);
         await User.create({ 
             email, 
             password: pwHash, 
             phone, 
-            userType });
+            userType 
+        });
             console.log('sign_up succeed')
         return res.redirect('/auth/login'); // sign_up succeed
 

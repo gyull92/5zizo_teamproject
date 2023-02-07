@@ -8,6 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" 
+        crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
         integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
         crossorigin="anonymous">
@@ -27,9 +30,11 @@
         }
 
         body {
-        margin: 0;
-        min-width: 992px;
-        font-family: "Helvetica";
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+            min-width: 992px;
+            font-family: "Helvetica";
         }
 
         .navbar{
@@ -64,7 +69,7 @@
         }
 
         .hero_header{
-        height: 450px;
+        height: auto;
         width: 100%;
         }
 
@@ -81,13 +86,13 @@
         margin-left: auto;
         margin-right: auto;
         padding: 0;
-        width: 740px;
+        /* width: 740px; */
         text-align: center;
         }
 
         .products img{
-        width: 225px;
-        height: 225px;
+        /* width: 225px;
+        height: 225px; */
         margin-right: 20px;
         margin-bottom: 20px;
         }
@@ -119,6 +124,15 @@
         margin-left: 10px;
         margin-right: 10px;
         }
+
+        #navButton {
+            margin-top:  3px;
+            margin-left: 5px;
+        }
+
+        #navName {
+            margin-top:  10px;
+        }
     </style>
 
     <script>
@@ -137,13 +151,13 @@
                     let products = response["productList"];
                     console.log('products-----', products)
                     for (let i = 0; i < products.length; i++) {
-                        makeProduct(
-                            products[i]["productId"],
-                            products[i]["image"], 
-                            products[i]["info"], 
-                            products[i]["name"], 
-                            products[i]["price"]
-                            );
+                        let productId = products[i]["productId"]
+                        let image = products[i]["image"]
+                        let info = products[i]["info"]
+                        let name = products[i]["name"]
+                        let price = products[i]["price"]
+                        let imgsrc = "../static/images/" + image
+                        makeProduct(productId, imgsrc, info, name, price);
                         }
                     }
                 });
@@ -152,12 +166,23 @@
         function makeProduct(productId, image, info, name, price) {
             console.log('productId---------',productId)
             let tempHtml = `<a href="#">
-                            <img src="${image}">
-                            <p>제품명 : ${name}</p>
-                            <p>설명 : ${info}</p>
-                            <p class="price">${price}원</p>
-                            <button onclick="putCart(${productId})" type="button" class="btn btn-primary">장바구니 담기</button>
-                            <p class="gap"></p>
+                            <div class="col-xl-3 col-lg-4 col-md-6">
+                                <div class="card" id="productcard" style="width: 18rem;">
+                                    <img src="${image}" class="card-img-top">
+                                    <div class="card-body">
+                                        <h5 class="card-title">${name}</h5>
+                                        <p class="card-text">
+                                        <span class="badge bg-dark">${info}</span>                                                  
+                                        </p>
+                                        <div class= "d-flex justify-content-between align-items-center">
+                                            <div class="btn-group" role="group" >      
+                                            <small class="text-dark" id="priceinput">가격 : ${price}원</small><br>             
+                                            <button onclick="putCart(${productId})" type="button" class="btn btn-sm btn-outline-secondary">Add Cart</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
                             </a>`;
             $("#products-box").append(tempHtml);
         }
@@ -178,29 +203,49 @@
 
 </head>
 <body>
-    <div class="navbar">
-        <a class="logo" href="#"> </a>
-        <ul>
-          <% if (user) { %>
-            <% if (user.userType === 2) { %>
-              <li><%= user.email.split('@')[0] %>관리자님 안녕하세요</li>
-              <li><a href="/adminprofile">관리자 페이지</a></li>
-              <li><a href="/auth/logout">로그아웃</a></li> 
-            <% } else { %>
-              <li><%= user.email.split('@')[0] %>님 안녕하세요</li>       
-              <li><a href="/general/cart">장바구니</a></li>
-              <li><a href="/profile">마이페이지</a></li>
-              <li><a href="/auth/logout">로그아웃</a></li> 
-            <% } %>
-          <% } else { %>                                      
-            <li><a href="/auth/login">로그인</a></li>
-            <li><a href="/auth/signup">회원가입</a></li>
-          <% } %>
-        </ul>
-      </div>
-      
-      <img class="hero_header" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMjNY7M1CKqyczEyfEqBXtX8E4QcprgySvmA&usqp=CAU">
-      <h1>Our new Products</h1>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">오지는 젤리</a>
+    
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <!-- <a class="nav-link " aria-current="page" href="#">홈</a> -->
+                    </li>
+                </ul>
+
+                <div class="navbar">
+                    <!-- <a class="logo" href="#"> </a> -->
+                    <ul>
+                      <% if (user) { %>
+                        <% if (user.userType === 2) { %>
+                          <li id="navName">Hello Admin <%= user.email.split('@')[0] %></li>
+                          <button id="navButton" type="button" onclick="location.href='/adminprofile'" class="btn btn-outline-success">Admin page</button> 
+                          <button id="navButton" type="button" onclick="location.href='/auth/logout'" class="btn btn-outline-success">Logout</button>  
+                        <% } else { %>
+                          <li id="navName">Hello <%= user.email.split('@')[0] %></li>       
+                          <button id="navButton" type="button" onclick="location.href='/general/cart'" class="btn btn-outline-success">Cart</button> 
+                          <button id="navButton" type="button" onclick="location.href='/profile'"      class="btn btn-outline-success">My Page</button> 
+                          <button id="navButton" type="button" onclick="location.href='/auth/logout'"  class="btn btn-outline-success">Logout</button> 
+                        <% } %>
+                      <% } else { %>   
+                        <button id="navButton" type="button" onclick="location.href='/auth/logout'" class="btn btn-outline-success">Login</button>                                    
+                        <!-- <li><a href="/auth/signup">회원가입</a></li> -->
+                      <% } %>
+                    </ul>
+                  </div>
+            </div>
+        </div>
+    </nav>
+
+      <!-- <img id="backImg" class="hero_header" src="https://images.unsplash.com/photo-1582058091505-f87a2e55a40f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"> -->
+      <h1>✨ Try The Beautiful Jelly ✨</h1>
       <div id="products-box" class="products">
   
         <div class="clearfix"></div>

@@ -1,0 +1,17 @@
+#productcard {
+    margin: auto;
+    text-align: center;
+}
+
+#modQuantity {
+    margin: auto;
+    text-align: center;
+}
+
+#priceinput {
+    margin: auto 30px auto auto;
+}
+
+input[type=number]::-webkit-inner-spin-button {
+    opacity: 1
+}

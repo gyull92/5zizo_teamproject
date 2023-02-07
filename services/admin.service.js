@@ -14,14 +14,14 @@ class AdminService {
         };
     };
 
-    // findProductAll = async () => {
-    //     try {
-    //         const productList = await this.adminRepository.findProductAll();
-    //         return productList;
-    //     } catch (error) {
-    //         throw error;
-    //     };
-    // };
+    findProductAll = async () => {
+        try {
+            const productList = await this.adminRepository.findProductAll();
+            return productList;
+        } catch (error) {
+            throw error;
+        };
+    };
 
     findProductList = async () => {
         try {

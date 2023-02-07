@@ -1,4 +1,4 @@
-POST http://localhost:3000/admin/adminprofile/productAdd
+POST http://localhost:3000/admin/productAdd
 Content-Type: application/json
 
 {
@@ -8,14 +8,14 @@ Content-Type: application/json
     "price": 2500
 }
 
-# ###
-# GET http://localhost:3000/admin/adminprofile/productList
+###
+GET http://localhost:3000/admin/adminprofile
 
 ###
-GET http://localhost:3000/admin/adminprofile/adminProduct
+GET http://localhost:3000/admin/adminProduct
 
 ###
-PUT http://localhost:3000/admin/adminprofile/productEdit/1
+PUT http://localhost:3000/admin/productEdit/1
 Content-Type: application/json
 
 {
@@ -26,4 +26,4 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:3000/admin/adminprofile/productDelete/3
+DELETE http://localhost:3000/admin/productDelete/4

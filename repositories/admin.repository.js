@@ -1,5 +1,6 @@
 const { Product } = require("../models");
 const { User }    = require("../models");
+const { Cart }    = require("../models");
 
 class AdminRepository {
     
@@ -18,14 +19,14 @@ class AdminRepository {
         };
     };
 
-    // findProductAll = async () => {
-    //     try {
-    //         const productList = await Product.findAll();
-    //         return productList;
-    //     } catch (error) {
-    //         throw error;
-    //     };
-    // };
+    findProductAll = async () => {
+        try {
+            const productList = await Product.findAll();
+            return productList;
+        } catch (error) {
+            throw error;
+        };
+    };
     
     findProductList = async () => {
         try {
@@ -56,6 +57,7 @@ class AdminRepository {
     productDelete = async (productId) => {
         try {
             const productDeleteData = await Product.destroy({where: { productId: productId }});
+            await Cart.destroy({where: { productId: productId }});
                 return productDeleteData;
         } catch (error) {
             throw error;

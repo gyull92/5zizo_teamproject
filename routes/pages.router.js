@@ -1,10 +1,11 @@
 const express = require('express');
 const router  = express.Router();
+const { upload } = require("../multer");
 const { isLoggedIn   , isNotLoggedIn } = require('../middlewares/auth');
 const { isGeneralIn  , isAdminIn }     = require('../middlewares/auth');
 const { renderMain   , renderLogin , renderSignUp } = require('../controllers/pages.controller');
 const { renderProfile, renderWithdrawal, renderAdminInProfile } = require('../controllers/pages.controller');
-const { renderProductList} = require('../controllers/pages.controller');
+const { renderProductList, renderProductAdd } = require('../controllers/pages.controller');
 
 // User's Data
 router.use((req, res, next) => {
@@ -27,5 +28,6 @@ router.get('/profile'        , isLoggedIn   , isGeneralIn , renderProfile);     
 
 // Only admin can access -------------------------------------------------------------------------------
 router.get('/adminprofile'   , isLoggedIn   , isAdminIn   , renderAdminInProfile); // GET  /adminprofile
+router.get('/productAdd'     , isLoggedIn   , isAdminIn   , renderProductAdd);     // GET  /productAdd
 
 module.exports = router;

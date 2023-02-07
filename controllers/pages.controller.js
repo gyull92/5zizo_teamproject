@@ -1,4 +1,5 @@
 const { Product } = require('../models');
+const { User } = require('../models');
 
 // The main page shows the all product list.
 exports.renderMain = async (req, res, next) => {
@@ -26,12 +27,19 @@ exports.renderProductList = async (req, res, next) => {
     };
 };   
 
-exports.renderSignUp = (req, res, next) => {
-    try {
-        res.render('signup');
+exports.renderSignUp = async (req, res, next) => {
+    try {     
+        const exAdmin = await User.findAll({ where: { userType: 2 } }); 
+        console.log("exAdmin-----", exAdmin)
+        if (exAdmin[0]) {
+            // return res.status(200).json({ result: 'Exist' });
+            return res.render('signup', { result: 'Exist' });
+        }
+        return res.render('signup', { result: 'Does not exist' });
+
     } catch (err) {
-        res.status(400).json({ message: err.message });
-        next(err);
+        return res.status(400).json({ message: err.message });
+        // next(err);
     }
 }; 
 
@@ -80,4 +88,14 @@ exports.renderAdminInProfile = (req, res, next) => {
         res.status(400).json({ message: err.message });
         next(err);
     }
-}; 
+};
+
+exports.renderProductAdd = (req, res, next) => {
+    try {
+        res.render('productAdd');
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+        next(err);
+    }
+};
+

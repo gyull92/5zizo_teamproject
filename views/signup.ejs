@@ -68,6 +68,21 @@
 
 </style>
 
+<script>
+  // function exAdmin() {
+  //     $.ajax({
+  //         type: "GET",
+  //         url: "/auth/signup",
+  //         data: {},
+  //         success: function (response) {
+  //             if (response['result'] == 'Exist') {
+  //                 alert('이미 사장으로 가입한사람이 있습니다!');
+  //             }
+  //         }
+  //     });
+  // }
+</script>
+
 <body>
     <div class="signUpBox">   
         <button id="main" type="button" onclick="location.href='/'" class="btn">main</button>
@@ -86,13 +101,16 @@
           </div>
           <div class="input-group">
             <div id="checkbox1">
+
+            <% if (result !== 'Exist') { %>    
             <input type="checkbox" name="userType" value="1" id="general" required autofocus>일반회원
             </div>
             <div id="checkbox1">
             <input type="checkbox" name="userType" value="2" id="admin" required autofocus>사장님으로 가입하기
+            <% } %>  
             </div>
           </div>
-          <button type="submit" class="btn">회원가입</button>
+          <button type="submit" onclick="exAdmin()" class="btn">회원가입</button>
           <button type="button" onclick="location.href='/auth/login'" class="btn">로그인</button>
         </form>
       </div>
