@@ -4,7 +4,7 @@ const Sequelize = require("sequelize");
 class OrderInfo extends Sequelize.Model {
     static initiate(sequelize) {
         OrderInfo.init({
-            orderinfoId: {
+            orderInfoId: {
                 type          : Sequelize.INTEGER,
                 primaryKey    : true,
                 autoIncrement : true
