@@ -134,24 +134,27 @@
 
 <script>
     function productEdit() {
-        let query = window.location.search;
-        let param = new URLSearchParams(query);
-        let productId = param.get("productId")
+        // let query = window.location.search;
+        // let param = new URLSearchParams(query);
+        // let productId = param.get("productId")
 
-        // let url = new URL(window.location.href);
         // let productId = url.searchParams.get("productId");  
-
+        
         let name = $('#name').val();
         let price = $('#price').val();
         let info = $('#info').val();
         let file = document.getElementById("Image").files[0];
-        // console.log("query---------", query)
-        console.log("url---------", url)
+
+        let url = new URL(window.location.href).href;
+        let urlArr = url.split('/');
+        let productId = urlArr[urlArr.length -1];
+
+        console.log("urlArr---------", urlArr)
         console.log("productId---------", productId)
-        console.log("name---------", name)
-        console.log("price---------", price)
-        console.log("info---------", info)
         console.log("file---------", file)
+        console.log("name---------", name)
+        console.log("info---------", info)
+        console.log("price---------", price)
 
         const formdata = new FormData();
         formdata.append("name", name);
@@ -159,9 +162,11 @@
         formdata.append("info", info);
         formdata.append("file", file);
 
+        console.log("formdata---------", formdata)
+
         $.ajax({
             type: 'PUT',
-            url: '/admin/productEdit/' + productId,
+            url: '/admin/productEdit/'+productId,
             data: formdata,
             cache: false,
             contentType: false,
