@@ -41,9 +41,12 @@ class AdminController {
 
     productEdit = async (req, res, next) => {
         try {
-            console.log("컨트롤러 productEdit------------")
-            const { image, name, info, price } = req.body;
+            const { name, info, price } = req.body;
             const { productId } = req.params;
+
+            const imgPath = req.file.path;
+            const image   = imgPath.split("\\")[3];
+
             const productEditData = await this.adminService.productEdit(image, name, info, price, productId);
 
             res.status(201).json({ data: productEditData });

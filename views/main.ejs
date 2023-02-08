@@ -236,11 +236,11 @@
                     <ul>
                       <% if (user) { %>
                         <% if (user.userType === 2) { %>
-                          <li id="navName">✨ Hello Admin <%= user.email.split('@')[0] %></li>
+                          <li id="navName">🥝 Hello Admin <%= user.email.split('@')[0] %></li>
                           <button id="navButton" type="button" onclick="location.href='/adminprofile'" class="btn btn-outline-success">Admin page</button> 
                           <button id="navButton" type="button" onclick="location.href='/auth/logout'" class="btn btn-outline-success">Logout</button>  
                         <% } else { %>
-                          <li id="navName">✨ Hello <%= user.email.split('@')[0] %></li>       
+                          <li id="navName">🥝 Hello <%= user.email.split('@')[0] %></li>       
                           <button id="navButton" type="button" onclick="location.href='/general/cart'" class="btn btn-outline-success">Cart</button> 
                           <button id="navButton" type="button" onclick="location.href='/profile'"      class="btn btn-outline-success">My Page</button> 
                           <button id="navButton" type="button" onclick="location.href='/auth/logout'"  class="btn btn-outline-success">Logout</button> 

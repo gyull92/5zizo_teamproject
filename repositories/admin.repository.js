@@ -40,7 +40,6 @@ class AdminRepository {
     
     productEdit = async (image, name, info, price, productId) => {
         try {
-            console.log("레파 productEdit------------")
             const productEditData = await Product.update({
                 image,
                 name,
