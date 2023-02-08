@@ -8,6 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" 
+        crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
         integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
         crossorigin="anonymous">
@@ -22,6 +25,9 @@
 
     <!-- style -->
     <style type="text/css">
+        body {
+            font-family: "Helvetica";
+        }
         .navbar{
         height: 60px;
         padding-left: 30px;
@@ -87,6 +93,24 @@
             margin-top: 50px;
             text-align: right;
         }
+        #navButton {
+            margin-top:  3px;
+            margin-left: 5px;
+        }
+
+        #navName {
+            margin-top:  10px;
+        }
+
+        #cartTitle {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 4%;
+        }
+        img {
+            object-fit: contain;
+        }
     </style>
 
     <script>
@@ -108,13 +132,14 @@
                         console.log("productIdList------", productIdList)
                         for (let i = 0; i < productsInCart.length; i++) {
                             let image = productsInCart[i].products.image;
+                            let imgsrc = "../static/images/" + image
                             let name = productsInCart[i].products.name;
                             let price = productsInCart[i].products.price;
                             let quantity = productsInCart[i].quantity;
                             let productId = productsInCart[i].products.productId;
                             productIdList.push(productId);
                             
-                            makeCart(image, name, price, quantity, productId);
+                            makeCart(imgsrc, name, price, quantity, productId);
                         }
                         window.localStorage.setItem('productIdList', productIdList);
                         if (productsInCart.length){
@@ -122,8 +147,7 @@
                         }
                     }
                 });
-        }
-
+            }
 
         let totalPrice = 0;
         let totalQuantity = 0;
@@ -138,7 +162,7 @@
                 <td>${price.toLocaleString('ko-KR')}원</td>
                 <td><input id="modQuantity-${productId}" class="modQuantity" type="number" min="0" value="${quantity}" /><button onclick="editQuantity(${productId})" type="button" class="btn btn-outline-dark">수량변경</button></td>
                 <td>${subPrice.toLocaleString('ko-KR')}원</td>
-                <td><button onclick="deleteProduct(${productId})" type="button" class="btn btn-dark">삭제</button></td>
+                <td><button onclick="deleteProduct(${productId})" type="button" class="btn btn-outline-success">삭제</button></td>
             </tr>`;
             $("#products-in-carts").append(tempHtml);
 
@@ -152,14 +176,14 @@
             let tempHtml = `<div class="card-body">
                         <h5 class="card-title">합계 금액 : ${totalPrice.toLocaleString('ko-KR')}원</h5>
                         <p class="card-text">상품 갯수 : ${totalQuantity}개</p>
-                        <a href="#" class="btn btn-primary">바로 구매하기</a>
+                        <button href="#" class="btn btn-outline-success">바로 구매하기</button>
                         </div>`
             $("#orderCard").append(tempHtml);
         }
 
         function makeBnt() {
-            let tempHtml = `<button onclick="deleteSelectedProduct()" type="button" class="btn btn-dark">선택항목 삭제</button>
-                            <button onclick="deleteAllProduct()" type="button" class="btn btn-dark">전체 삭제</button>`
+            let tempHtml = `<button onclick="deleteSelectedProduct()" type="button" class="btn btn-outline-success">선택항목 삭제</button>
+                            <button onclick="deleteAllProduct()" type="button" class="btn btn-outline-success">전체 삭제</button>`
             $("#Bnts").append(tempHtml);
         }
 
@@ -234,17 +258,39 @@
     </script>
 </head>
 <body>
-    <div class="navbar">
-        <a class="logo" href="#"> </a>
-        <ul>
-            <% if (user) { %>
-            <li><%= user.email.split('@')[0] %>님 안녕하세요</li>  
-            <li><a href="/">SHOP</a></li>
-            <li><a href="/profile">마이페이지</a></li>
-            <li><a href="/auth/logout">로그아웃</a></li> 
-            <% } %>
-        </ul>
-      </div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">💜 오지는 젤리 💚</a>
+    
+            <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button> -->
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <!-- <a class="nav-link " aria-current="page" href="#">홈</a> -->
+                    </li>
+                </ul>
+
+                <div class="navbar">
+                    <!-- <a class="logo" href="#"> </a> -->
+                    <ul>
+                      <% if (user) { %>      
+                          <li id="navName">✨ Hello <%= user.email.split('@')[0] %></li>        
+                          <button id="navButton" type="button" onclick="location.href='/profile'"      class="btn btn-outline-success">My Page</button> 
+                          <button id="navButton" type="button" onclick="location.href='/auth/logout'"  class="btn btn-outline-success">Logout</button> 
+                        <% } %>
+                    </ul>
+
+                  </div>
+            </div>
+        </div>
+    </nav>
+
+    <h1 id="cartTitle">🍇🍓🥝 CartList 🥝🍓🍇</h1>
 
       <table class="table">
         <thead>
@@ -259,33 +305,7 @@
           </tr>
         </thead>
         <tbody id="products-in-carts">
-          <tr>
-            <th scope="row"><input type="checkbox" aria-label="Checkbox for following text input"></th>
-            <td><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRk7JqMw7ZYZP4ZW136wcoMTmLzbrMIJzUWb1Dhu9cHwCPp0gA&usqp=CAc"></td>
-            <td>시원한 사이다</td>
-            <td>3000원</td>
-            <td><input type="number" min="0" value="2" /></td>
-            <td>6000원</td>
-            <td><button type="button" class="btn btn-dark">삭제</button></td>
-          </tr>
-          <tr>
-            <th scope="row"><input type="checkbox" aria-label="Checkbox for following text input"></th>
-            <td><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRk7JqMw7ZYZP4ZW136wcoMTmLzbrMIJzUWb1Dhu9cHwCPp0gA&usqp=CAc"></td>
-            <td>시원한 사이다</td>
-            <td>3000원</td>
-            <td><input type="number" value="2" /></td>
-            <td>6000원</td>
-            <td><button type="button" class="btn btn-dark">삭제</button></td>
-          </tr>
-          <tr>
-            <th scope="row"><input type="checkbox" aria-label="Checkbox for following text input"></th>
-            <td><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRk7JqMw7ZYZP4ZW136wcoMTmLzbrMIJzUWb1Dhu9cHwCPp0gA&usqp=CAc"></td>
-            <td>시원한 사이다</td>
-            <td>3000원</td>
-            <td><input type="number" value="2" /></td>
-            <td>6000원</td>
-            <td><button type="button" class="btn btn-dark">삭제</button></td>
-          </tr>
+          
         </tbody>
         
       </table>
@@ -293,11 +313,7 @@
       <div id="Bnts"></div>
 
       <div id="orderCard" class="card">
-        <!-- <div class="card-body">
-          <h5 class="card-title">합계 금액 : </h5>
-          <p class="card-text">상품 갯수 : </p>
-          <a href="#" class="btn btn-primary">바로 구매하기</a>
-        </div> -->
+
       </div>
 
 

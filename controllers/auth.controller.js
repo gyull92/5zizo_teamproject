@@ -1,17 +1,19 @@
 const passport = require('passport')
 const bcrypt   = require('bcrypt');
-const { User } = require('../models');
+const User     = require('../models/user');
 
 //---------------------------------------------------------------------------------
 exports.signUp = async (req, res, next) => {
-    const { email, password, phone, userType } = req.body;
+    const { email, password, phone } = req.body;
     try {
         const exUser  = await User.findOne({ where: { email } }); 
         const exAdmin = await User.findAll({ where: { userType: 2 } }); 
         if (exUser) {
             return res.redirect('/auth/signup?error=exist');
         }
-        // let userType = 0
+        console.log("auth_컨트롤러_exUser----------",exUser)
+        
+        let userType = 2
         if (exAdmin[0]) {
             userType = 1;
         }

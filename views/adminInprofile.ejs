@@ -124,6 +124,15 @@
     #navName {
         margin-top:  10px;
     }
+
+    #addButton{
+        margin-left: 45px;
+    }
+
+    #addButton-group {
+        display: flex;
+        align-items: center;
+    }
 </style>
 
 <script>
@@ -145,13 +154,13 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/">오지는 젤리</a>
+            <a class="navbar-brand" href="/">💜 오지는 젤리 💚</a>
     
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
-            </button>
+            </button> -->
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -165,7 +174,7 @@
                     <ul>
                         <% if (user) { %>
                             <% if (user.userType === 2) { %>   
-                              <li id="navName">Hello <%= user.email.split('@')[0] %></li>
+                              <li id="navName">✨ Hello <%= user.email.split('@')[0] %></li>
                               <button id="navButton" type="button" onclick="location.href='/productAdd'" class="btn btn-outline-success">상품등록</button> 
                               <button id="navButton" type="button" onclick="location.href='#'" class="btn btn-outline-success">주문목록</button> 
                               <button id="navButton" type="button" onclick="location.href='#'" class="btn btn-outline-success">회원정보</button> 

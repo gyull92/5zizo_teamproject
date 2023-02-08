@@ -30,7 +30,7 @@ exports.renderProductList = async (req, res, next) => {
 exports.renderSignUp = async (req, res, next) => {
     try {     
         const exAdmin = await User.findAll({ where: { userType: 2 } }); 
-        console.log("exAdmin-----", exAdmin)
+        console.log("페이지_컨트롤러_exAdmin-----", exAdmin)
         if (exAdmin[0]) {
             // return res.status(200).json({ result: 'Exist' });
             return res.render('signup', { result: 'Exist' });
@@ -99,3 +99,11 @@ exports.renderProductAdd = (req, res, next) => {
     }
 };
 
+exports.renderProductEdit = (req, res, next) => {
+    try {
+        res.render('productEdit');
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+        next(err);
+    }
+};

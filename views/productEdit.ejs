@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>5zizo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+        
+    <!-- <script src="static/js/productEdit.js"></script> -->
+</head>
+
+<style type="text/css">
+    * {
+    box-sizing: border-box;
+    }
+
+    body {
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+        min-width: 992px;
+        font-family: "Helvetica";
+    }
+
+    .navbar{
+    height: 60px;
+    padding-left: 30px;
+    }
+
+    .logo{
+    line-height: 60px;
+    float: left;
+    }
+
+    .logo img{
+    vertical-align: middle;
+    }
+
+    .navbar ul{
+    float: right;
+    }
+
+    .navbar li{
+    list-style-type: none;
+    float: left;
+    margin-right: 30px;
+    }
+
+    .navbar a{
+    text-decoration: none;
+    color: black;
+    font-style: bold;
+    font-size: 13px;
+    }
+
+    .hero_header{
+    height: auto;
+    width: 100%;
+    }
+
+    body h1{
+    text-align: center;
+    margin-top: 60px;
+    margin-bottom: 60px;
+    font-size: 24px;
+    font-style: bold;
+    color: #545454;
+    }
+
+    .products {
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0;
+    /* width: 740px; */
+    text-align: center;
+    }
+
+    .products img{
+    /* width: 225px;
+    height: 225px; */
+    margin-right: 20px;
+    margin-bottom: 20px;
+    }
+
+    .products a{
+    text-decoration: none;
+    color: black;
+    float: left;
+    font-size: 16px;
+    }
+
+    .gap{
+    margin-top: 4px;
+    margin-bottom: 80px;
+    }
+
+    .clearfix{
+    clear: both;
+    }
+
+    .footer{
+    text-align: center;
+    }
+
+    .footer img{
+    margin-top: 40px;
+    height: 20px;
+    margin-bottom: 80px;
+    margin-left: 10px;
+    margin-right: 10px;
+    }
+
+    #navButton {
+        margin-top:  3px;
+        margin-left: 5px;
+    }
+
+    #navName {
+        margin-top:  10px;
+    }
+
+    #addButton{
+        margin-left: 45px;
+    }
+
+    #addButton-group {
+        display: flex;
+        align-items: center;
+    }
+</style>
+
+<script>
+    function productEdit() {
+        let query = window.location.search;
+        let param = new URLSearchParams(query);
+        let productId = param.get("productId")
+
+        // let url = new URL(window.location.href);
+        // let productId = url.searchParams.get("productId");  
+
+        let name = $('#name').val();
+        let price = $('#price').val();
+        let info = $('#info').val();
+        let file = document.getElementById("Image").files[0];
+        // console.log("query---------", query)
+        console.log("url---------", url)
+        console.log("productId---------", productId)
+        console.log("name---------", name)
+        console.log("price---------", price)
+        console.log("info---------", info)
+        console.log("file---------", file)
+
+        const formdata = new FormData();
+        formdata.append("name", name);
+        formdata.append("price", price);
+        formdata.append("info", info);
+        formdata.append("file", file);
+
+        $.ajax({
+            type: 'PUT',
+            url: '/admin/productEdit/' + productId,
+            data: formdata,
+            cache: false,
+            contentType: false,
+            processData: false,
+            enctype: "multipart/form-data",
+            success: function (response) {
+                alert("상품 수정에 성공하였습니다.")
+                window.location.replace("/adminprofile");
+            }
+        });
+    };
+</script>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">💜 오지는 젤리 💚</a>
+    
+            <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button> -->
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <!-- <a class="nav-link " aria-current="page" href="#">홈</a> -->
+                    </li>
+                </ul>
+
+                <div class="navbar">
+                    <!-- <a class="logo" href="#"> </a> -->
+                    <ul>
+                        <% if (user) { %>
+                            <% if (user.userType === 2) { %>   
+                              <li id="navName">✨ Hello <%= user.email.split('@')[0] %></li>
+                              <button id="navButton" type="button" onclick="location.href='/productAdd'" class="btn btn-outline-success">상품등록</button> 
+                              <button id="navButton" type="button" onclick="location.href='#'" class="btn btn-outline-success">주문목록</button> 
+                              <button id="navButton" type="button" onclick="location.href='#'" class="btn btn-outline-success">회원정보</button> 
+                              <button id="navButton" type="button" onclick="location.href='/auth/logout'" class="btn btn-outline-success">Logout</button>  
+                            <% } %>
+                        <% } %> 
+                    </ul>
+                  </div>
+            </div>
+        </div>
+    </nav>
+    <main class="mt-3">
+        <div class="container">
+            <h2 class="text-center">제품 수정 </h2>
+            <div class="mb-3 row" id="file_form">
+                <label class="col-md-3 col-form-label">제품명</label>
+                <div class="col-md-9">
+                    <input for="name" id="name" type="text" class="form-control">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-md-3 col-form-label">제품가격</label>
+                <div class="col-md-9">
+                    <div class="input-group mb-3">
+                        <input for="price" id="price" type="number" class="form-control">
+                        <span class="input-group-text">원</span>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="mb-3 row">
+                <label class="col-md-3 col-form-label">상품설명</label>
+                <div class="col-md-9">
+                    <input for="info" id="info" type="text" class="form-control">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-md-3 col-form-label">썸네일이미지</label>
+                <div class="col-md-9">
+                    <input id="Image" class="form-control" type="file" accept="image/png,image/jpeg">
+                    <div class="alert alert-secondary" role="alert">
+                        <ul>
+                            <li>이미지 사이즈:350*350</li>
+                            <li>파일 사이즈:1M 이하</li>
+                            <li>파일 확장자:png,jpg만 가능</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                <div class="col-6 d-grid p-1">
+                    <button type="button" class="btn btn-lg btn-dark" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal"> 취소하기</button>
+                </div>
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                제품등록을 취소하시겠습니까?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary">OK</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 d-grid p-1">
+                    <button onclick="productEdit()" type="button" class="btn btn-outline-success">저장하기</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

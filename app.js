@@ -29,8 +29,6 @@ sequelize.sync({ force: false })
     .catch((err) => { console.log(err); });
 
 app.use(morgan('dev')); 
-// app.use(express.static(path.join(__dirname, 'public')));
-// app.use('/img', express.static(path.join(__dirname, 'uploads'))); 
 app.use(express.static('views'));
 app.set("views", path.join(__dirname, "./views"));
 app.use(express.static(path.join(__dirname, "./views")));
@@ -57,7 +55,6 @@ app.use(passport.session());
 
 // ------------------------------------------ routes -----------------------------------------------
 app.use('/',      pageRouter); 
-// app.use('/cart',  )  
 app.use('/auth',  authRouter);
 app.use('/admin', adminRouter);
 app.use('/general', cartRouter);

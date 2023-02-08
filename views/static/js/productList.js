@@ -27,9 +27,10 @@ function productIdList() {
                                    <span class="badge bg-dark">${info}</span>                                                  
                                  </p>
                                    <div class= "d-flex justify-content-between align-items-center">
-                                     <div class="btn-group" role="group" >      
+                                     <div id="addButton-group" class="btn-group" role="group" >      
                                        <small class="text-dark" id="priceinput">가격 : ${price}원</small><br>             
-                                       <button onclick="deleteProduct(${productId})" type="button" class="btn btn-sm btn-outline-secondary">상품삭제</button>
+                                       <button id="addButton" onclick="deleteProduct(${productId})" type="button" class="btn btn-sm btn-outline-secondary">삭제</button>
+                                       <button onclick="location.href='/productEdit/${productId}'" type="button" class="btn btn-sm btn-outline-secondary">수정</button>
                                      </div>
                                    </div>
                                </div>
