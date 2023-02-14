@@ -7,15 +7,11 @@ class AdminRepository {
 // Admin's product Repository CRUD ---------------------------------------------------------------  
     productAdd = async (image, name, info, price) => {
         try {
-            const productAddData = await Product.create({
-                image,
-                name,
-                info,
-                price
-            });
+            const productAddData = await Product.create({ image, name, info, price });
             return productAddData;
         } catch (error) {
-            throw error;
+            throw new Error(error.message);
+            // ex) throw new Error(`ValidationError: Failed to update user name: ${error.message}`);
         };
     };
 
@@ -24,7 +20,7 @@ class AdminRepository {
             const productList = await Product.findAll();
             return productList;
         } catch (error) {
-            throw error;
+            throw new Error(error.message);
         };
     };
     
@@ -33,24 +29,17 @@ class AdminRepository {
             const productList = await Product.findAll({});
             return productList;
         } catch (error) {
-            throw error;
+            throw new Error(error.message);
         };
     };
 
     
     productEdit = async (image, name, info, price, productId) => {
         try {
-            const productEditData = await Product.update({
-                image,
-                name,
-                info,
-                price,
-            }, {
-                where: { productId: productId },
-            });
+            const productEditData = await Product.update({ image, name, info, price }, {where: { productId: productId } });
             return productEditData;
         } catch (error) {
-            throw error;
+            throw new Error(error.message);
         };
     };
 
@@ -60,17 +49,17 @@ class AdminRepository {
             await Cart.destroy({where: { productId: productId }});
                 return productDeleteData;
         } catch (error) {
-            throw error;
+            throw new Error(error.message);
         };
     };
-// -----------------------------------------------------------------------------------------------
+// Admin's ---------------------------------------------------------------------------------------
     
     findMemberList = async () => {
         try {
             const memberList = await User.findAll();
             return memberList;
         } catch (error) {
-            throw error;
+            throw new Error(error.message);
         };
     };
 };

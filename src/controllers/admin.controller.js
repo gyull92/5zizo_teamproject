@@ -15,6 +15,7 @@ class AdminController {
 
             res.status(201).json({ data: productAddData });
         } catch (error) {
+            console.error(error)
             res.status(400).json({ errorMessage: error.message });
         };
     };
@@ -25,6 +26,7 @@ class AdminController {
 
             res.status(201).json({ data: productList });
         } catch (error) {
+            console.error(error)
             res.status(400).json({ errorMessage: error.message });
         };
     };
@@ -35,6 +37,7 @@ class AdminController {
 
             res.status(201).json({ data: productList });
         } catch (error) {
+            console.error(error)
             res.status(400).json({ errorMessage: error.message });
         };
     };
@@ -51,6 +54,7 @@ class AdminController {
 
             res.status(201).json({ data: productEditData });
         } catch (error) {
+            console.error(error)
             res.status(400).json({ errorMessage: error.message });
         };
     };
@@ -62,6 +66,7 @@ class AdminController {
 
             res.status(201).json({ result: 'success', data: productDeleteData });
         } catch (error) {
+            console.error(error)
             res.status(400).json({ errorMessage: error.message });
         };
     };   
@@ -73,6 +78,7 @@ class AdminController {
 
             res.status(201).json({ data: memberList });
         } catch (error) {
+            console.error(error)
             res.status(400).json({ errorMessage: error.message });
         };
     };

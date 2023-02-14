@@ -4,21 +4,37 @@ class AuthService {
     authRepository = new AuthRepository();
 
     getExUser = async (email) => {
-        const exUser = await this.authRepository.getExUser(email);
-        return exUser;
+        try {
+            const exUser = await this.authRepository.getExUser(email);
+            return exUser;
+        }catch (error) {
+            throw new Error(error.message);
+        }
     }
 
     findExAdmin = async() => {
-        const exAdmin = await this.authRepository.findExAdmin(); 
-        return exAdmin;
+        try {
+            const exAdmin = await this.authRepository.findExAdmin(); 
+            return exAdmin;
+        }catch (error) {
+            throw new Error(error.message);
+        }
     }
 
     createUser = async (email, password, phone, userType) => {
-        await this.authRepository.createUser(email, password, phone, userType);
+        try {
+            await this.authRepository.createUser(email, password, phone, userType);
+        }catch (error) {
+            throw new Error(error.message);
+        }
     }
 
     deleteUser = async (email) => {
-        await this.authRepository.deleteUser(email);
+        try {
+            await this.authRepository.deleteUser(email);
+        }catch (error) {
+            throw new Error(error.message);
+        }
     }
 }
 
