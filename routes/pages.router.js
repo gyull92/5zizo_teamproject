@@ -3,9 +3,9 @@ const router  = express.Router();
 const { upload } = require("../multer");
 const { isLoggedIn   , isNotLoggedIn } = require('../middlewares/auth');
 const { isGeneralIn  , isAdminIn }     = require('../middlewares/auth');
-const { renderMain   , renderLogin , renderSignUp } = require('../controllers/pages.controller');
-const { renderProfile, renderWithdrawal, renderAdminInProfile } = require('../controllers/pages.controller');
-const { renderProductList, renderProductAdd, renderProductEdit } = require('../controllers/pages.controller');
+const { renderMain   , renderLogin , renderSignUp } = require('../src/controllers/pages.controller');
+const { renderProfile, renderWithdrawal, renderAdminInProfile } = require('../src/controllers/pages.controller');
+const { renderProductList, renderProductAdd, renderProductEdit } = require('../src/controllers/pages.controller');
 
 // User's Data
 router.use((req, res, next) => {

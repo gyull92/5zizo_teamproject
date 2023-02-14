@@ -3,9 +3,9 @@ const router = express.Router();
 
 const { isLoggedIn }  = require('../middlewares/auth')
 const { isGeneralIn } = require('../middlewares/auth');
-const { renderCart } = require('../controllers/pages.controller');
+const { renderCart } = require('../src/controllers/pages.controller');
 
-const CartController = require('../controllers/cart.controller');
+const CartController = require('../src/controllers/cart.controller');
 const cartController = new CartController();
 
 router.get('/cart' , isLoggedIn   , isGeneralIn , renderCart)                             // GET   /general/cart

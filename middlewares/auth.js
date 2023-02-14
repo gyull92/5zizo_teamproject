@@ -41,8 +41,3 @@ exports.isAdminIn = (req, res, next) => {
         res.redirect(`/?error=${message}`);
     }
 };
-
-// exports.TEST = (req, res, next) => {
-//     const userType = req.user.userType;
-//     console.log("userType--------", req.user.userType);
-// }

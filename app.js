@@ -6,7 +6,7 @@ const path          = require('path');
 const session       = require('express-session');
 const dotenv        = require('dotenv');
 const passport      = require('passport'); 
-const { sequelize } = require('./models');
+const { sequelize } = require('./src/models');
 
 dotenv.config(); 
 
@@ -15,14 +15,14 @@ const authRouter  = require('./routes/auth.router');
 const pageRouter  = require('./routes/pages.router');
 const adminRouter = require('./routes/admin.router');
 const cartRouter  = require('./routes/cart.router');
-const passportConfig = require('./controllers/passport');
+const passportConfig = require('./src/controllers/passport');
 
 // -------------------------------------------------------------------------------------------------
 const app = express();
-passportConfig(); // passport 설정
+passportConfig();
 app.set('port', process.env.PORT || 3000);
 app.set('view engine', 'ejs');
-app.set('views', 'views');    // view engine 설정
+app.set('views', 'views');
 // -------------------------------------------------------------------------------------------------
 sequelize.sync({ force: false })
     .then ((   ) => { console.log('데이터베이스 연결 성공'); })
@@ -43,9 +43,7 @@ app.use(session({
     saveUninitialized: false,
     secret: process.env.COOKIE_SECRET,
     cookie: {
-        maxAge: 1 * 60 * 60 * 1000, // 1 hours
-        // maxAge: 24 * 60 * 60 * 1000, // 24 hours
-        // maxAge: 5 * 60 * 1000, // 5 minutes
+        maxAge: 1 * 60 * 60 * 1000,
         httpOnly: true,
         secure: false,
     }
@@ -72,7 +70,6 @@ app.use((err, req, res, next) => {
     res.status(err.status || 500);
     res.render('error');
 });
-
 // ------------------------------------------------------------------------------------------------
 app.listen(app.get('port'), () => {
     console.log(app.get('port'), '번 포트에서 대기중')

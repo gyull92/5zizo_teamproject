@@ -4,7 +4,7 @@ const { isLoggedIn } = require('../middlewares/auth')
 const { isAdminIn }  = require('../middlewares/auth');
 const { upload } = require("../multer");
 
-const AdminController = require("../controllers/admin.controller");
+const AdminController = require("../src/controllers/admin.controller");
 const adminController = new AdminController();
 
 // Admin's product Routes CRUD --------------------------------------------------------------- 
