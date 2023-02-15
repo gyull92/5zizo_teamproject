@@ -2,12 +2,5 @@ ERD 설정 ( 관계 )
 
 코드 컨벤션 통일
 
-에러 응답 코드 상황별 적용
-
-findProductList / findProductAll 리펙토링
-
-admin은 controller 를 퉁치는 것 보단..
-admin 기능 controller 기능을 페이지별로 놔두기
-
 미완료 기능구현 구현하기
 ( 어드민기능, 소켓, 테스트 )

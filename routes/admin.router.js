@@ -4,8 +4,11 @@ const { isLoggedIn } = require('../middlewares/auth')
 const { isAdminIn }  = require('../middlewares/auth');
 const { upload } = require("../multer");
 
-const AdminController = require("../src/controllers/admin.controller");
-const adminController = new AdminController();
+const AdminProductController = require("../src/controllers/admin.product.controller");
+const AdminMenbersController = require("../src/controllers/admin.product.controller");
+
+const adminProductController = new AdminProductController();
+const adminMenbersController = new AdminMenbersController();
 
 // Admin's product Routes CRUD --------------------------------------------------------------- 
 router.post(
@@ -13,20 +16,13 @@ router.post(
     isLoggedIn,
     isAdminIn,
     upload.single("file"),
-    adminController.productAdd                // POST /admin/productAdd
+    adminProductController.productAdd          // POST /admin/productAdd
 );
 
 router.get(
     "/adminprofile", 
     isLoggedIn,
-    adminController.findProductAll            // GET /admin/productList
-);
-
-router.get(
-    "/adminProduct",
-    isLoggedIn,
-    isAdminIn,
-    adminController.findProductList           // GET /admin/adminProduct
+    adminProductController.findProductAll      // GET /admin/productList
 );
 
 router.put(
@@ -34,20 +30,20 @@ router.put(
     isLoggedIn,
     isAdminIn,
     upload.single("file"),
-    adminController.productEdit               // PUT /admin/productEdit/:productId
+    adminProductController.productEdit         // PUT /admin/productEdit/:productId
 );
 
 router.delete(
     "/productDelete/:productId",
     isLoggedIn,
     isAdminIn, 
-    adminController.productDelete             // DELETE /admin/productDelete/:productId
+    adminProductController.productDelete       // DELETE /admin/productDelete/:productId
 );
 // -----------------------------------------------------------------------------------------------
 
 router.get(
-    "/adminMemberList",                       // GET /admin/adminMemberList
-    adminController.findMemberList
+    "/adminMemberList",                        // GET /admin/adminMemberList
+    adminMenbersController.findMemberList
 );
 
 module.exports = router;

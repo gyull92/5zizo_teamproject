@@ -5,11 +5,10 @@ const { isLoggedIn   , isNotLoggedIn } = require('../middlewares/auth');
 const { isGeneralIn  , isAdminIn }     = require('../middlewares/auth');
 const { renderMain   , renderLogin , renderSignUp } = require('../src/controllers/pages.controller');
 const { renderProfile, renderWithdrawal, renderAdminInProfile } = require('../src/controllers/pages.controller');
-const { renderProductList, renderProductAdd, renderProductEdit } = require('../src/controllers/pages.controller');
+const { renderProductList, renderProductAdd, renderProductEdit , renderCart} = require('../src/controllers/pages.controller');
 
 // User's Data
 router.use((req, res, next) => {
-    // console.log('req.user----------', req.user)   
     res.locals.user = req.user;
     next();
 })
@@ -25,6 +24,7 @@ router.get('/auth/withdrawal', isLoggedIn   , renderWithdrawal);                
 
 // Only general users can access -----------------------------------------------------------------------
 router.get('/profile'        , isLoggedIn   , isGeneralIn , renderProfile);        // GET  /profile
+router.get('/general/cart'   , isLoggedIn   , isGeneralIn , renderCart)            // GET  /general/cart
 
 // Only admin can access -------------------------------------------------------------------------------
 router.get('/adminprofile'   , isLoggedIn   , isAdminIn   , renderAdminInProfile); // GET  /adminprofile

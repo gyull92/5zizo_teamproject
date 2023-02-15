@@ -23,17 +23,7 @@ class AdminRepository {
             throw new Error(error.message);
         };
     };
-    
-    findProductList = async () => {
-        try {
-            const productList = await Product.findAll({});
-            return productList;
-        } catch (error) {
-            throw new Error(error.message);
-        };
-    };
 
-    
     productEdit = async (image, name, info, price, productId) => {
         try {
             const productEditData = await Product.update({ image, name, info, price }, {where: { productId: productId } });

@@ -23,15 +23,6 @@ class AdminService {
         };
     };
 
-    findProductList = async () => {
-        try {
-            const productList = await this.adminRepository.findProductList();
-            return productList;
-        } catch (error) {
-            throw error;
-        };
-    };
-
     productEdit = async (image, name, info, price, productId) => {
         try {
             const productEditData = await this.adminRepository.productEdit(image, name, info, price, productId);

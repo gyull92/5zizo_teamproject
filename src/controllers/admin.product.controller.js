@@ -31,17 +31,6 @@ class AdminController {
         };
     };
 
-    findProductList = async (req, res, next) => {
-        try {
-            const productList = await this.adminService.findProductList();
-
-            res.status(201).json({ data: productList });
-        } catch (error) {
-            console.error(error)
-            res.status(400).json({ errorMessage: error.message });
-        };
-    };
-
     productEdit = async (req, res, next) => {
         try {
             const { name, info, price } = req.body;
