@@ -1,6 +1,0 @@
-GET http://localhost:3000/general/cartList
-// 모든 상품 가져오기
-
-###
-DELETE http://localhost:3000/general/cart
-// 장바구니 상품 모두 삭제
