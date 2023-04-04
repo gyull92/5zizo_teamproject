@@ -5,7 +5,10 @@ class ProductListController {
 
     findProductAll = async (req, res, next) => {
         try {
-            const productList = await this.productListService.findProductAll();
+            const { page } = req.params;
+            const curPage = Number(page)
+            const pageSize = 8
+            const productList = await this.productListService.findProductAll(curPage, pageSize);
 
             res.status(201).json({ data: productList });
         } catch (error) {

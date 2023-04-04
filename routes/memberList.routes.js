@@ -5,7 +5,7 @@ const MemberListController = require("../controllers/memberList.controller");
 const memberListController = new MemberListController();
 
 router.get(
-    "/adminMemberList",
+    "/memberList",
     memberListController.findMemberList
 );
 

@@ -1,10 +1,14 @@
-const { product } = require("../models");
+const { Product } = require("../models");
 
 class ProductListRepository {
-    findProductAll = async () => {
+    findProductAll = async (offset, limit) => {
         try {
-            const productList = await product.findAll();
-            console.log(productList)
+            const productList = await Product.findAll({
+                raw: true,
+                offset: offset,
+                limit: limit
+            });
+
             return productList;
         } catch (error) {
             throw error;

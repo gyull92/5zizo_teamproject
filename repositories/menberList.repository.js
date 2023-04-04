@@ -1,9 +1,9 @@
-const { user } = require("../models");
+const { User } = require("../models");
 
 class MemberListRepository {
     findMemberList = async () => {
         try {
-            const memberList = await user.findAll();
+            const memberList = await User.findAll();
 
             return memberList;
         } catch (error) {

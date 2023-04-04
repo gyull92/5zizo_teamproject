@@ -6,7 +6,7 @@ class MemberListController {
     findMemberList = async (req, res, next) => {
         try {
             const memberList = await this.memberListService.findMemberList();
-
+            console.log(memberList)
             res.status(201).json({ data: memberList });
         } catch (error) {
             res.status(400).json({ errorMessage: "회원 목록 조회에 실패하였습니다." });

@@ -5,7 +5,7 @@ $(document).ready(function () {
 function orderlist() {
     $.ajax({
         type: 'get',
-        url: '/paymentList',
+        url: '/productOrder',
         success: function (response) {
             let rows = response['order']
             for (let i in rows) {
@@ -14,7 +14,6 @@ function orderlist() {
                 let name = rows[i].name
                 let price = rows[i].price
                 let imgsrc = "../static/images/" + image
-
                 let temp_html = `<div class="row">
                  <div class="col-md-5">
                      <div id="carouselExample" class="card ">
@@ -55,10 +54,10 @@ function orderlist() {
                        </div>
                  </div>`;
                 $("#orderlist").append(tempHtml);
-            }
+            };
         }
     });
-}
+};
 
 function order(order) {
     let image = $('#image').val()
@@ -73,7 +72,7 @@ function order(order) {
         success: function (response) {
             if (response['result'] == 'success') {
                 alert('주문 완료!');
-            }
+            };
         }
     });
-}
+};
