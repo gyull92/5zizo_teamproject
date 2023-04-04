@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+  .withdrawalBox {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+  }
+
+  .input-group {
+      margin-bottom: 10px;
+  }
+
+  label {
+      display: block;
+      margin-bottom: 5px;
+  }
+
+  input {
+      width: 90%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+  }
+
+  .btn {
+      width: 100%;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+      margin-top: 20px;
+  }
+  #main {
+      width: 100px;
+      padding: 10px;
+      background-color: #71d671;
+      color: white;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      margin-bottom: 20px;
+  }
+
+</style>
+
+<body>
+    <div class="withdrawalBox">
+            <button id="main" type="button" onclick="location.href='/'" class="btn">main</button>
+            <h1>회원탈퇴</h1>
+
+        <form id="withdrawal-form" action="/auth/withdrawal" method="post">
+            <div class="input-group">
+            <label for="withdrawal-password">비밀번호</label>
+            <input id="withdrawal-password" type="password" name="password">
+            
+            <label for="withdrawal-password-confirm">비밀번호 확인</label>
+            <input id="withdrawal-password-confirm" type="password" name="passwordConfirm">
+            </div>
+            
+            <button type="submit" onclick="if (confirm('회원탈퇴를 하시겠습니까?')) location.href='/auth/withdrawal'" class="btn">회원탈퇴</button>
+            <!-- location.href='/auth/withdrawal' -->
+        </form>
+    </div>
+</body>
+</html>

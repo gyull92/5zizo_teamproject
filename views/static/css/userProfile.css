@@ -1,0 +1,41 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    background-image: url("");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.flex_center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.status {
+    border-radius: 50%;
+    background-color: #6D67E4;
+    width: 400px;
+    height: 400px;
+}
+
+.btn-warning {
+    margin: 20px;
+    padding: 30px;
+    border-radius: 10%;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.top-bar {}

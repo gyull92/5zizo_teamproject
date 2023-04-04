@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>장바구니 조회</title>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" 
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+        crossorigin="anonymous">
+
+    <!-- JS -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"
+        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+
+    <!-- style -->
+    <style type="text/css">
+        body {
+            font-family: "Helvetica";
+        }
+        .navbar{
+        height: 60px;
+        padding-left: 30px;
+        }
+
+        .logo{
+        line-height: 60px;
+        float: left;
+        }
+
+        .logo img{
+        vertical-align: middle;
+        }
+
+        .navbar ul{
+        float: right;
+        }
+
+        .navbar li{
+        list-style-type: none;
+        float: left;
+        margin-right: 30px;
+        }
+
+        .navbar a{
+        text-decoration: none;
+        color: black;
+        font-style: bold;
+        font-size: 13px;
+        }
+
+        .table {
+            width: 70%;
+            margin: auto;
+        }
+
+        td > img {
+            width: 75px;
+            height: 75px;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+
+        .modQuantity {
+            width: 40px;
+            margin-right: 10px;
+        }
+
+        table > button {
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+        
+        #Bnts {
+            margin-left: 200px;
+            margin-bottom: 5px;
+            margin-top: 5px;
+        }
+
+        .card {
+            width: 50%;
+            margin: auto;
+            margin-top: 50px;
+            text-align: right;
+        }
+        #navButton {
+            margin-top:  3px;
+            margin-left: 5px;
+        }
+
+        #navName {
+            margin-top:  10px;
+        }
+
+        #cartTitle {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 4%;
+        }
+        img {
+            object-fit: contain;
+        }
+    </style>
+
+    <script>
+        $(document).ready(function () {
+            showProductsInCart();
+        });
+
+        function showProductsInCart() {
+            $("#products-in-carts").html("");
+            $.ajax({
+                    type: "GET",
+                    url: "/general/cartList/",
+                    data: {},
+                    success: function (response) {
+                        console.log("response------", response)
+                        let productsInCart = response["cart"];
+                        console.log("productsInCart------", productsInCart)
+                        let productIdList = [];
+                        console.log("productIdList------", productIdList)
+                        for (let i = 0; i < productsInCart.length; i++) {
+                            let image = productsInCart[i].products.image;
+                            let imgsrc = "../static/images/" + image
+                            let name = productsInCart[i].products.name;
+                            let price = productsInCart[i].products.price;
+                            let quantity = productsInCart[i].quantity;
+                            let productId = productsInCart[i].products.productId;
+                            productIdList.push(productId);
+                            
+                            makeCart(imgsrc, name, price, quantity, productId);
+                        }
+                        window.localStorage.setItem('productIdList', productIdList);
+                        if (productsInCart.length){
+                            makeBnt();
+                        }
+                    }
+                });
+            }
+
+        let totalPrice = 0;
+        let totalQuantity = 0;
+        function makeCart(image, name, price, quantity, productId) {
+            let subPrice = price * quantity;
+            totalPrice  += subPrice;
+            totalQuantity += quantity;
+            let tempHtml = `<tr>
+                <th scope="row"><input id="check-box-${productId}" type="checkbox" aria-label="Checkbox for following text input"></th>
+                <td><img src="${image}"></td>
+                <td>${name}</td>
+                <td>${price.toLocaleString('ko-KR')}원</td>
+                <td><input id="modQuantity-${productId}" class="modQuantity" type="number" min="0" value="${quantity}" /><button onclick="editQuantity(${productId})" type="button" class="btn btn-outline-dark">수량변경</button></td>
+                <td>${subPrice.toLocaleString('ko-KR')}원</td>
+                <td><button onclick="deleteProduct(${productId})" type="button" class="btn btn-outline-success">삭제</button></td>
+            </tr>`;
+            $("#products-in-carts").append(tempHtml);
+
+            if(totalPrice>0){
+                makeBillCard(totalPrice, totalQuantity);
+            }
+        }
+
+        function makeBillCard(totalPrice, totalQuantity) {
+            $("#orderCard").html("");
+            let tempHtml = `<div class="card-body">
+                        <h5 class="card-title">합계 금액 : ${totalPrice.toLocaleString('ko-KR')}원</h5>
+                        <p class="card-text">상품 갯수 : ${totalQuantity}개</p>
+                        <button href="#" class="btn btn-outline-success">바로 구매하기</button>
+                        </div>`
+            $("#orderCard").append(tempHtml);
+        }
+
+        function makeBnt() {
+            let tempHtml = `<button onclick="deleteSelectedProduct()" type="button" class="btn btn-outline-success">선택항목 삭제</button>
+                            <button onclick="deleteAllProduct()" type="button" class="btn btn-outline-success">전체 삭제</button>`
+            $("#Bnts").append(tempHtml);
+        }
+
+        function deleteSelectedProduct() {
+            let testList = window.localStorage.getItem('productIdList').split(',')
+
+            let delArray = []
+
+            for(let i=0; i<testList.length; i++){
+                if($(`#check-box-${testList[i]}`).is(":checked") === true){
+                    delArray.push(testList[i]);
+                }
+            }
+
+            $.ajax({
+                    type: "DELETE",
+                    url: "/general/del/checked",
+                    traditional: true,	// ajax 배열 넘기기 옵션!
+                    data: { "checkedList" : delArray },
+                    success: function (response) {
+                        if (response['result'] == 'success') {
+                            alert('선택 항목 삭제 완료!');
+                            window.location.reload();
+                        }
+                    }
+                });
+        }
+
+        function deleteAllProduct() {
+            $.ajax({
+                    type: "DELETE",
+                    url: "/general/cart",
+                    data: { },
+                    success: function (response) {
+                        if (response['result'] == 'success') {
+                            alert('장바구니 비우기 완료!');
+                            window.location.reload();
+                        }
+                    }
+                });
+        }
+
+
+        function editQuantity(productId) {
+            let modQuantity = $(`#modQuantity-${productId}`).val();
+            $.ajax({
+                    type: "PATCH",
+                    url: "/general/cart/" + productId,
+                    data: { modQuantity },
+                    success: function (response) {
+                        if (response['result'] == 'success') {
+                            alert('수량 수정 완료!');
+                            window.location.reload();
+                        }
+                    }
+                });
+        }
+
+        function deleteProduct(productId) {
+            $.ajax({
+                    type: "DELETE",
+                    url: "/general/cart/" + productId,
+                    data: { },
+                    success: function (response) {
+                        if (response['result'] == 'success') {
+                            alert('삭제 완료!');
+                            window.location.reload();
+                        }
+                    }
+                });
+        }
+    </script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">💜 오지는 젤리 💚</a>
+    
+            <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button> -->
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <!-- <a class="nav-link " aria-current="page" href="#">홈</a> -->
+                    </li>
+                </ul>
+
+                <div class="navbar">
+                    <!-- <a class="logo" href="#"> </a> -->
+                    <ul>
+                      <% if (user) { %>      
+                          <li id="navName">🥝 Hello <%= user.email.split('@')[0] %></li>        
+                          <button id="navButton" type="button" onclick="location.href='/profile'"      class="btn btn-outline-success">My Page</button> 
+                          <button id="navButton" type="button" onclick="location.href='/auth/logout'"  class="btn btn-outline-success">Logout</button> 
+                        <% } %>
+                    </ul>
+
+                  </div>
+            </div>
+        </div>
+    </nav>
+
+    <h1 id="cartTitle">🍇🍓🥝 CartList 🥝🍓🍇</h1>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">선택</th>
+            <th scope="col">이미지</th>
+            <th scope="col">상품명</th>
+            <th scope="col">가격</th>
+            <th scope="col">수량</th>
+            <th scope="col">합계</th>
+            <th scope="col">삭제</th>
+          </tr>
+        </thead>
+        <tbody id="products-in-carts">
+          
+        </tbody>
+        
+      </table>
+
+      <div id="Bnts"></div>
+
+      <div id="orderCard" class="card">
+
+      </div>
+
+
+    
+</body>
+</html>
