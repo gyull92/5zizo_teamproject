@@ -1,37 +1,6 @@
-GET http://localhost:3000/product
+GET http://localhost:3000/general/cartList
 // 모든 상품 가져오기
 
 ###
-POST http://localhost:3000/product
-Content-Type: application/json
-
-{
-    "image": "오지는젤리 이미지",
-    "name": "오지는젤리",
-    "info": "이것은 오지는젤리다.",
-    "price": "1000"
-}
-
-###
-POST http://localhost:3000/auth/login
-// 상품 등록
-Content-Type: application/json
-
-{
-    "email": "hoon@naver.com",
-    "password": "1234"
-}
-
-###
-PUT http://localhost:3000/cart/:productId
-// 장바구니에 상품 담기
-Content-Type: application/json
-
-{
-    "productId": "1"
-}
-
-
-###
-GET http://localhost:3000/cart
-// 내가 가진 장바구니 목록을 전부 불러오기
+DELETE http://localhost:3000/general/cart
+// 장바구니 상품 모두 삭제

@@ -2,48 +2,50 @@ const express = require("express");
 const router  = express.Router();
 const { isLoggedIn } = require('../middlewares/auth')
 const { isAdminIn }  = require('../middlewares/auth');
+const { upload } = require("../multer");
 
 const AdminController = require("../controllers/admin.controller");
 const adminController = new AdminController();
 
 // Admin's product Routes CRUD --------------------------------------------------------------- 
 router.post(
-    "/adminprofile/productAdd",
+    "/productAdd",
     isLoggedIn,
     isAdminIn,
-    adminController.productAdd                // POST /admin/adminprofile/productAdd
+    upload.single("file"),
+    adminController.productAdd                // POST /admin/productAdd
 );
 
-// router.get(
-//     "/adminprofile/productList", 
-//     isLoggedIn,
-//     adminController.findProductAll            // GET /admin/adminprofile/productList
-// );
+router.get(
+    "/adminprofile", 
+    isLoggedIn,
+    adminController.findProductAll            // GET /admin/productList
+);
 
 router.get(
-    "/adminprofile/adminProduct",
+    "/adminProduct",
     isLoggedIn,
     isAdminIn,
-    adminController.findProductList           // GET /admin/adminprofile/adminProduct
+    adminController.findProductList           // GET /admin/adminProduct
 );
 
 router.put(
-    "/adminprofile/productEdit/:productId",
+    "/productEdit/:productId",
     isLoggedIn,
     isAdminIn,
-    adminController.productEdit               // PUT /admin/adminprofile/productEdit/:productId
+    adminController.productEdit               // PUT /admin/productEdit/:productId
 );
 
 router.delete(
-    "/adminprofile/productDelete/:productId",
+    "/productDelete/:productId",
     isLoggedIn,
     isAdminIn, 
-    adminController.productDelete             // DELETE /admin/adminprofile/productDelete/:productId
+    adminController.productDelete             // DELETE /admin/productDelete/:productId
 );
 // -----------------------------------------------------------------------------------------------
 
 router.get(
-    "/adminMemberList",                       // GET /admin/adminprofile/adminMemberList
+    "/adminMemberList",                       // GET /admin/adminMemberList
     adminController.findMemberList
 );
 

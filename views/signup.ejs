@@ -65,35 +65,41 @@
     justify-content: center;
     align-items: center;
   }
-
+  #Oztitle {
+        margin-bottom: 40px;
+        text-decoration: none;
+        color: rgb(98, 94, 94);
+    }
 </style>
 
 <body>
     <div class="signUpBox">   
-        <button id="main" type="button" onclick="location.href='/'" class="btn">main</button>
+        
+        <div class="loginOutBox">
+        <h1 id="Oztitle"><a id="Oztitle" href="/">💜 오지는 젤리 💚</a></h1>
+
         <form id="signup-form" action="/auth/signup" method="post">
-          <div class="input-group">
-            <label for="signup-email">이메일</label>
-            <input id="signup-email" type="email" name="email" required autofocus>
-          </div>
-          <div class="input-group">
-            <label for="signup-password">비밀번호</label>
-            <input id="signup-password" type="password" name="password" required autofocus>
-          </div>
-          <div class="input-group">
-            <label for="signup-phone">휴대전화</label>
-            <input id="signup-phone" type="text" name="phone" required autofocus>
-          </div>
-          <div class="input-group">
+            <div class="input-group">
+            <input id="signup-email" type="email" name="email" placeholder="email" required autofocus>
+            </div>
+            <div class="input-group">
+            <input id="signup-password" type="password" name="password" placeholder="password" required autofocus>
+            </div>
+            <div class="input-group">
+            <input id="signup-phone" type="text" name="phone" placeholder="phone" required autofocus>
+            </div>
+            <div class="input-group">
             <div id="checkbox1">
+            <% if (result !== 'Exist') { %>    
             <input type="checkbox" name="userType" value="1" id="general" required autofocus>일반회원
             </div>
             <div id="checkbox1">
             <input type="checkbox" name="userType" value="2" id="admin" required autofocus>사장님으로 가입하기
+            <% } %>  
             </div>
-          </div>
-          <button type="submit" class="btn">회원가입</button>
-          <button type="button" onclick="location.href='/auth/login'" class="btn">로그인</button>
+            </div>
+            <button type="submit" onclick="exAdmin()" class="btn">회원가입</button>
+            <button type="button" onclick="location.href='/auth/login'" class="btn">로그인</button>
         </form>
       </div>
 </body>

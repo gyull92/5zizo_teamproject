@@ -1,5 +1,6 @@
 const { Product } = require("../models");
 const { User }    = require("../models");
+const { Cart }    = require("../models");
 
 class AdminRepository {
     
@@ -18,18 +19,18 @@ class AdminRepository {
         };
     };
 
-    // findProductAll = async () => {
-    //     try {
-    //         const productList = await Product.findAll();
-    //         return productList;
-    //     } catch (error) {
-    //         throw error;
-    //     };
-    // };
+    findProductAll = async () => {
+        try {
+            const productList = await Product.findAll();
+            return productList;
+        } catch (error) {
+            throw error;
+        };
+    };
     
     findProductList = async () => {
         try {
-            const productList = await Product.findAll();  // userId 던져줘야할듯? 관리자(userType 2)가 등록한 상품 목록을 보는것이니. 
+            const productList = await Product.findAll({});
             return productList;
         } catch (error) {
             throw error;
@@ -39,6 +40,7 @@ class AdminRepository {
     
     productEdit = async (image, name, info, price, productId) => {
         try {
+            console.log("레파 productEdit------------")
             const productEditData = await Product.update({
                 image,
                 name,
@@ -56,6 +58,7 @@ class AdminRepository {
     productDelete = async (productId) => {
         try {
             const productDeleteData = await Product.destroy({where: { productId: productId }});
+            await Cart.destroy({where: { productId: productId }});
                 return productDeleteData;
         } catch (error) {
             throw error;

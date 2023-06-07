@@ -1,32 +1,40 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
-module.exports = (sequelize, DataTypes) => {
-  class user extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
-      // models.user.belongsTo(models.cart, { foreignKey: 'cartId' });
-      // models.user.belongsTo(models.orderinfo, { foreignKey: 'orderinfoId' });
+const Sequelize = require("sequelize");
+
+// user table
+class User extends Sequelize.Model {
+    static initiate(sequelize) {
+        User.init({
+            userId: {
+                type          : Sequelize.INTEGER,
+                primaryKey    : true,
+                autoIncrement : true,
+            },
+            email: {
+                type          : Sequelize.STRING,
+                allowNull     : false,
+                unique        : true,
+            },
+            password: {
+                type          : Sequelize.STRING,
+                allowNell     : false,
+            },
+            phone: {
+                type          : Sequelize.STRING,
+                allowNell     : false,
+            },
+            userType: {
+                type          : Sequelize.INTEGER,
+                allowNell     : false,
+            },
+        }, { // options
+            sequelize,
+            timestamps  : true,
+            underscored : false,
+            paranoid    : false,
+            modelName   : "User",
+            tableName   : "users",
+            charset     : "utf8",
+            collate     : "utf8_general_ci",
+        });
     }
-  }
-  user.init({
-    userId: {
-      primaryKey: true,
-      type: DataTypes.INTEGER,
-    },
-    email: DataTypes.STRING,
-    password: DataTypes.STRING,
-    phone: DataTypes.STRING,
-    userType: DataTypes.INTEGER
-  }, {
-    sequelize,
-    modelName: 'user',
-  });
-  return user;
 };

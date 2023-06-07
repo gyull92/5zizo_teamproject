@@ -14,7 +14,7 @@ function productAdd() {
 
     $.ajax({
         type: 'POST',
-        url: 'api/productAdd',
+        url: '/admin/productAdd',
         data: formdata,
         cache: false,
         contentType: false,
@@ -22,7 +22,7 @@ function productAdd() {
         enctype: "multipart/form-data",
         success: function (response) {
             alert("상품 등록에 성공하였습니다.")
-            window.location.replace("/productList");
+            window.location.replace("/adminprofile");
         }
     });
 };

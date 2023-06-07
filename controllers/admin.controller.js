@@ -7,8 +7,10 @@ class AdminController {
 
     productAdd = async (req, res, next) => {
         try {
-            const { image, name, info, price } = req.body;
-
+            const { name, info, price } = req.body;
+            const imgPath = req.file.path;
+            const image = imgPath.split("\\")[3];
+            
             const productAddData = await this.adminService.productAdd(image, name, info, price);
 
             res.status(201).json({ data: productAddData });
@@ -17,15 +19,15 @@ class AdminController {
         };
     };
 
-    // findProductAll = async (req, res, next) => {
-    //     try {
-    //         const productList = await this.adminService.findProductAll();
+    findProductAll = async (req, res, next) => {
+        try {
+            const productList = await this.adminService.findProductAll();
 
-    //         res.status(201).json({ data: productList });
-    //     } catch (error) {
-    //         res.status(400).json({ errorMessage: error.message });
-    //     };
-    // };
+            res.status(201).json({ data: productList });
+        } catch (error) {
+            res.status(400).json({ errorMessage: error.message });
+        };
+    };
 
     findProductList = async (req, res, next) => {
         try {
@@ -39,6 +41,7 @@ class AdminController {
 
     productEdit = async (req, res, next) => {
         try {
+            console.log("컨트롤러 productEdit------------")
             const { image, name, info, price } = req.body;
             const { productId } = req.params;
             const productEditData = await this.adminService.productEdit(image, name, info, price, productId);
@@ -54,7 +57,7 @@ class AdminController {
             const { productId } = req.params;
             const productDeleteData = await this.adminService.productDelete(productId);
 
-            res.status(201).json({ data: productDeleteData });
+            res.status(201).json({ result: 'success', data: productDeleteData });
         } catch (error) {
             res.status(400).json({ errorMessage: error.message });
         };

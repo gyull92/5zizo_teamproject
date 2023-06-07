@@ -14,14 +14,14 @@ class AdminService {
         };
     };
 
-    // findProductAll = async () => {
-    //     try {
-    //         const productList = await this.adminRepository.findProductAll();
-    //         return productList;
-    //     } catch (error) {
-    //         throw error;
-    //     };
-    // };
+    findProductAll = async () => {
+        try {
+            const productList = await this.adminRepository.findProductAll();
+            return productList;
+        } catch (error) {
+            throw error;
+        };
+    };
 
     findProductList = async () => {
         try {
@@ -34,6 +34,7 @@ class AdminService {
 
     productEdit = async (image, name, info, price, productId) => {
         try {
+            console.log("서비스 productEdit------------")
             const productEditData = await this.adminRepository.productEdit(image, name, info, price, productId);
             return productEditData;
         } catch (error) {

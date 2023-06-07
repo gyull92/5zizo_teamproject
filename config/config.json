@@ -1,22 +1,22 @@
 {
   "development": {
     "username": "root",
-    "password": "221114",
-    "database": "5zozo",
+    "password": "alskfl(30523",
+    "database": "5jijo_db_tset",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
     "password": null,
-    "database": "database_test",
+    "database": "e_commerce",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "production": {
     "username": "root",
     "password": null,
-    "database": "database_production",
+    "database": "e_commerce",
     "host": "127.0.0.1",
     "dialect": "mysql"
   }

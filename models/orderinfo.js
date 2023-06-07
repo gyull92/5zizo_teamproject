@@ -1,31 +1,48 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
-module.exports = (sequelize, DataTypes) => {
-  class orderinfo extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
-      // models.orderinfo.belongsTo(models.user, { foreignKey: 'userId' });
-      // models.orderinfo.belongsTo(models.orderProduct, { foreignKey: 'productId' });
+const Sequelize = require("sequelize");
+
+// OrderInfo table
+class OrderInfo extends Sequelize.Model {
+    static initiate(sequelize) {
+        OrderInfo.init({
+            orderInfoId: {
+                type          : Sequelize.INTEGER,
+                primaryKey    : true,
+                autoIncrement : true
+            },
+            userId: {
+                type          : Sequelize.INTEGER,
+                allowNull     : false,
+            },
+            address: {
+                type          : Sequelize.STRING,
+                allowNell     : false,
+            },
+            phone: {
+                type          : Sequelize.INTEGER,
+                allowNell     : false,
+            },
+            state: {
+                type          : Sequelize.INTEGER,
+                allowNell     : false,
+            }
+        }, { // options
+            sequelize,
+            timestamps  : true,
+            underscored : false,
+            paranoid    : false,
+            modelName   : "OrderInfo",
+            tableName   : "orderInfos",
+            charset     : "utf8",
+            collate     : "utf8_general_ci",
+        });
     }
-  }
-  orderinfo.init({
-    orderinfoId: {
-      primaryKey: true,
-      type: DataTypes.INTEGER,
-    },
-    userId: DataTypes.INTEGER,
-    address: DataTypes.STRING,
-    phone: DataTypes.STRING
-  }, {
-    sequelize,
-    modelName: 'orderinfo',
-  });
-  return orderinfo;
+    static associate(db) {        
+        db.OrderInfo.belongsToMany(db.Product, {  
+           foreignKey : 'productId',   
+           as         : 'productId',
+           through    : 'orderProducts',
+        });
+    }
 };
+
+module.exports = OrderInfo;
