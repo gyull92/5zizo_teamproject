@@ -2,9 +2,7 @@ function productAdd() {
     let name = $('#name').val();
     let price = $('#price').val();
     let info = $('#info').val();
-    // let image = $('#image').val()
     let file = document.getElementById("Image").files[0];
-    console.log(name, price, info, file)
 
     const formdata = new FormData();
     formdata.append("name", name);

@@ -10,21 +10,30 @@ class User extends Sequelize.Model {
                 autoIncrement : true,
             },
             email: {
-                type          : Sequelize.STRING,
-                allowNull     : false,
+                type          : Sequelize.STRING(40),
+                allowNull     : true,
                 unique        : true,
             },
             password: {
-                type          : Sequelize.STRING,
-                allowNell     : false,
+                type          : Sequelize.STRING(100),
+                allowNell     : true,
             },
             phone: {
-                type          : Sequelize.STRING,
-                allowNell     : false,
+                type          : Sequelize.STRING(30),
+                allowNell     : true,
             },
             userType: {
-                type          : Sequelize.INTEGER,
+                type          : Sequelize.STRING(30),
                 allowNell     : false,
+            },
+            provider: {
+                type          : Sequelize.ENUM("local", "kakao"),
+                allowNull     : false,
+                defaultValue  : "local",
+            },
+            snsId: {   
+                type          : Sequelize.STRING(30),
+                allowNull     : true,              
             },
         }, { // options
             sequelize,

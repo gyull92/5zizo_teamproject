@@ -3,11 +3,11 @@ const PaymentListRepository = require("../repositories/paymentList.repository");
 class PaymentListService {
     paymentListRepository = new PaymentListRepository();
 
-    findPaymentAll = async () => {
+    findPaymentAll = async (userId) => {
         try {
-            const PaymentList = await this.paymentListRepository.findPaymentAll();
+            const paymentList = await this.paymentListRepository.findPaymentAll(userId);
 
-            return PaymentList;
+            return paymentList;
         } catch (error) {
             throw error;
         };

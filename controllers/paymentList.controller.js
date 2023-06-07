@@ -1,13 +1,16 @@
 const PaymentListService = require("../services/paymentList.service");
 
 class PaymentListController {
-    PaymentListService = new PaymentListService();
+    paymentListService = new PaymentListService();
 
     findPaymentAll = async (req, res, next) => {
         try {
-            const PaymentList = await this.PaymentListService.findPaymentAll();
+            console.log("22222")
+            const userId = "1"
 
-            res.status(201).json({ data: PaymentList });
+            const paymentList = await this.paymentListService.findPaymentAll(userId);
+
+            res.status(201).json({ data: paymentList });
         } catch (error) {
             res.status(400).json({ errorMessage: "결제 내역 조회에 실패하였습니다" });
         };

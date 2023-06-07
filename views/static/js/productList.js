@@ -1,13 +1,25 @@
+let page = 1
+
 $(document).ready(function () {
-  productIdList();
+  productIdList(page);
 });
 
-function productIdList() {
+function productIdList(page) {
+  let query = window.location.search;
+  let param = new URLSearchParams(query);
+  if (page === 1) {
+    let getPage = param.get('page');
+    if (getPage === null) {
+      page = page
+    } else {
+      page = getPage
+    }
+  }
+
   $.ajax({
     type: 'get',
-    url: '/admin/adminprofile',
+    url: `/api/productList/${page}`,
     success: function (response) {
-      console.log(response)
       const rows = response.data;
       for (let i in rows) {
         let image = rows[i].image
@@ -18,10 +30,12 @@ function productIdList() {
         let productId = rows[i].productId;
 
         let temp_html = `
-        <div class="col-xl-3 col-lg-4 col-md-6">
+        <div class="col-xl-3 col-lg-4 col-md-6" id="productlistbox">
                            <div class="card" id="productcard" style="width: 18rem;">
-                             <img src="${imgsrc}" class="card-img-top">
-                               <div class="card-body">
+                           <div id="image">
+                           <img src="${imgsrc}" class="card-img-top" id="imgbox">
+                           </div>
+                               <div class="card-body" id="infobox">
                                  <h5 class="card-title">${name}</h5>
                                  <p class="card-text">
                                    <span class="badge bg-dark">${info}</span>                                                  
