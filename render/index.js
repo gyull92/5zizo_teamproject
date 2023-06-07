@@ -29,4 +29,12 @@ router.get("/userPage", (req, res) => {
     res.render("userPage.ejs");
 });
 
+router.get("/memberList", (req, res) => {
+    res.render("memberList.ejs");
+});
+
+router.get("/productEdit", (req, res) => {
+    res.render("productEdit.ejs");
+});
+
 module.exports = router;

@@ -1,12 +1,13 @@
-const express       = require('express');
-const cookieParser  = require('cookie-parser');
-const bodyParser    = require('body-parser');
-const morgan        = require('morgan');
-const path          = require('path');
-const session       = require('express-session');
-const dotenv        = require('dotenv');
-const passport      = require('passport'); 
+const express = require("express");
+const app = express();
+const port = 4000;
+const router = require("./routes");
+const render = require("./render");
+const path = require('path');
+const dotenv    = require('dotenv');
 const { sequelize } = require('./models');
+
+dotenv.config();
 
 dotenv.config(); 
 
@@ -18,7 +19,6 @@ const cartRouter  = require('./routes/cart.router');
 const passportConfig = require('./controllers/passport');
 
 // -------------------------------------------------------------------------------------------------
-const app = express();
 passportConfig(); // passport 설정
 app.set('port', process.env.PORT || 3000);
 app.set('view engine', 'ejs');
@@ -33,35 +33,12 @@ app.use(express.static('views'));
 app.set("views", path.join(__dirname, "./views"));
 app.use(express.static(path.join(__dirname, "./views")));
 
-app.use(express.json());
-app.use(express.urlencoded({ extended:false} ));
-app.use(cookieParser(process.env.COOKIE_SECRET)); 
-app.use(session({ 
-    resave: false,
-    saveUninitialized: false,
-    secret: process.env.COOKIE_SECRET,
-    cookie: {
-        maxAge: 1 * 60 * 60 * 1000, // 1 hours
-        // maxAge: 24 * 60 * 60 * 1000, // 24 hours
-        // maxAge: 5 * 60 * 1000, // 5 minutes
-        httpOnly: true,
-        secure: false,
-    }
-}));
-app.use(passport.initialize()); 
-app.use(passport.session()); 
+sequelize.sync({ force: false })
+    .then ((   ) => { console.log('데이터베이스 연결 성공'); })
+    .catch((err) => { console.log(err); });
 
-// ------------------------------------------ routes -----------------------------------------------
-app.use('/',      pageRouter); 
-app.use('/auth',  authRouter);
-app.use('/admin', adminRouter);
-app.use('/general', cartRouter);
-
-// ------------------------------------------ error ------------------------------------------------
-app.use((req, res, next) => {
-    const error = new Error(`${req.method} ${req.url} 라우터가 없습니다.`);
-    error.status = 404;
-    next(error);
+app.listen(port, () => {
+    console.log(port, "start");
 });
 
 module.exports = app;

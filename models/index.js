@@ -30,27 +30,4 @@ Object.keys(db).forEach(modelName => {
   }
 });
 
-
-// const User = require('./user');
-// const Cart = require('./cart');
-// const OrderInfo = require('./orderInfo');
-// const Product   = require('./product');
-// const OrderProduct  = require('./orderProduct');
-
-// db.User = User;
-// db.Cart = Cart;
-// db.OrderInfo = OrderInfo;
-// db.Product   = Product;
-// db.OrderProduct = OrderProduct
-
-// // 설정한 initiate, associate를 한번식 호출 해줘야하기때문에 있다.
-
-// User.initiate(sequelize);
-// Cart.initiate(sequelize);
-// OrderInfo.initiate(sequelize);
-// OrderProduct.initiate(sequelize);
-
-// OrderInfo.associate(db);
-// Product.associate(db);
-
 module.exports = db;

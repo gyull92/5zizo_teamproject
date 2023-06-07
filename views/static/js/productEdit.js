@@ -1,11 +1,4 @@
-
-
-function productEdit() {
-    console.log("1234")
-    let query = window.location.search;
-    let param = new URLSearchParams(query);
-    let productId = param.get("productId")
-
+function productEdit(productId) {
     let name = $('#name').val();
     let price = $('#price').val();
     let info = $('#info').val();
@@ -19,7 +12,7 @@ function productEdit() {
 
     $.ajax({
         type: 'PUT',
-        url: '/admin/productEdit/:' + productId,
+        url: 'api/productEdit/:productId',
         data: formdata,
         cache: false,
         contentType: false,
@@ -31,4 +24,3 @@ function productEdit() {
         }
     });
 };
-
