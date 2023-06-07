@@ -33,6 +33,7 @@ router.put(
     "/productEdit/:productId",
     isLoggedIn,
     isAdminIn,
+    upload.single("file"),
     adminController.productEdit               // PUT /admin/productEdit/:productId
 );
 

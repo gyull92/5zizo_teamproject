@@ -149,13 +149,6 @@
         let urlArr = url.split('/');
         let productId = urlArr[urlArr.length -1];
 
-        console.log("urlArr---------", urlArr)
-        console.log("productId---------", productId)
-        console.log("file---------", file)
-        console.log("name---------", name)
-        console.log("info---------", info)
-        console.log("price---------", price)
-
         const formdata = new FormData();
         formdata.append("name", name);
         formdata.append("price", price);
@@ -202,7 +195,7 @@
                     <ul>
                         <% if (user) { %>
                             <% if (user.userType === 2) { %>   
-                              <li id="navName">✨ Hello <%= user.email.split('@')[0] %></li>
+                              <li id="navName">🥝 Hello <%= user.email.split('@')[0] %></li>
                               <button id="navButton" type="button" onclick="location.href='/productAdd'" class="btn btn-outline-success">상품등록</button> 
                               <button id="navButton" type="button" onclick="location.href='#'" class="btn btn-outline-success">주문목록</button> 
                               <button id="navButton" type="button" onclick="location.href='#'" class="btn btn-outline-success">회원정보</button> 
